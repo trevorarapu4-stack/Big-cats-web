@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+
+    --breakpoint-3xl: 1920px;
+    --color-orange-50: #FFF8F3;
+    --color-orange-100: #FFEBDD;
+    --color-orange-200: #FFD2B3;
+    --color-orange-300: #FFAE75;
+    --color-orange-400: #F57D35;
+    /* Your base */
+    --color-orange-500: #C35214;
+    --color-orange-600: #A3430F;
+    --color-orange-700: #82340C;
+    --color-orange-800: #6A2B0A;
+    --color-orange-900: #561F07;
+    --color-orange-950: #2F1204;
+}
+
+* {
+    /* margin: 0;
+    padding: 0; */
+    box-sizing: border-box;
+    font-family: 'Outfit';
+    transition: 0.4s;
+}
+
+:root {
+    --ui-radius: 0.25rem;
+}
+
+h1,
+h2 {
+    font-family: 'Lobster';
+}
+
+p {
+    font-size: 1.3rem;
+}
+
+button {
+    cursor: pointer;
+}
