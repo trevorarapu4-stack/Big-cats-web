@@ -37,31 +37,31 @@
                     <h1>8</h1>
                 </div>
             </div>
-            <div class="each">
+            <div class="each" @click="adminComponent = 'Gallery'" >
                 <div class="top">
                     <Icon name="solar:gallery-edit-bold-duotone" />
                     <p>Gallery</p>
                 </div>
                 <div class="bot">
-                    <h1>233</h1>
+                    <h1>{{ forGalleryNum }}</h1>
                 </div>
             </div>
-            <div class="each">
+            <div class="each" @click="adminComponent = 'Categories'" >
                 <div class="top">
                     <Icon name="solar:add-folder-bold-duotone" />
                     <p>Categories</p>
                 </div>
                 <div class="bot">
-                    <h1>6</h1>
+                    <h1>{{ forCategoriesNum }}</h1>
                 </div>
             </div>
-            <div class="each">
+            <div class="each" @click="adminComponent = 'Destinations'" >
                 <div class="top">
                     <Icon name="solar:pin-bold-duotone" />
                     <p>Destinations</p>
                 </div>
                 <div class="bot">
-                    <h1>13</h1>
+                    <h1>{{ forDestinationsNum }}</h1>
                 </div>
             </div>
             <div class="each">
@@ -79,11 +79,23 @@
 
 <script setup>
 import { url } from 'valibot';
+import { useDestinations } from '#imports';
+import { useGallery } from '#imports';
+import { useCategories } from '#imports';
 
+const forDestinations = useDestinations()
+const forDestinationsNum = computed(() => forDestinations.allDestinations.length )
+
+const forGallery = useGallery()
+const forGalleryNum = computed(() => forGallery.allGallery.length )
+
+const forCategories = useCategories()
+const forCategoriesNum = computed(() => forCategories.allCategories.length )
 
 const bcId = useCookie('bcId', { sameSite: 'lax' })
 const bcName = useCookie('bcName', { sameSite: 'lax' })
 const bcEmail = useCookie('bcEmail', { sameSite: 'lax' })
+const adminComponent = useCookie('adminComponent', { sameSite: 'lax' })
 
 </script>
 
@@ -130,6 +142,11 @@ const bcEmail = useCookie('bcEmail', { sameSite: 'lax' })
 
             &:hover {
                 border: 2px solid var(--color-orange-500);
+            }
+
+            @media (prefers-color-scheme: dark) {
+                border: 2px solid #333333;
+                background-color: #333333;
             }
 
             .top {

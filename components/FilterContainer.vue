@@ -35,6 +35,10 @@ const value3 = ref('Done')
         padding: 1.5rem;
         border-radius: var(--ui-radius);
 
+        @media (prefers-color-scheme: 'dark') {
+            background-color: #1f1f1f;
+        }
+
         h3 {
             margin-bottom: 1rem;
             font-weight: 600;

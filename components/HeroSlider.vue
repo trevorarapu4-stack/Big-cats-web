@@ -78,7 +78,7 @@ onMounted(() => {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                filter: brightness(80%);
+                filter: brightness(70%);
             }
         }
     }

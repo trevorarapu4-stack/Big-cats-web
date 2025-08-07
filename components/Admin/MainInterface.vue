@@ -1,13 +1,18 @@
 <template>
     <div class="interface">
         <div class="first">
-            <h2>Dashboard</h2>
+            <h2>{{ adminComponent }}</h2>
             <UDropdownMenu :items="items" :ui="{ content: 'w-48' }" :popper="{ placement: 'bottom-end', offset: 8 }">
                 <UButton :label="getShortName(bcName)" color="neutral" size="xl" variant="ghost"
                     icon="solar:user-circle-bold-duotone" />
             </UDropdownMenu>
         </div>
-        <Dashboard />
+        <Dashboard v-if="adminComponent === 'Dashboard'" />
+        <AdminDestinations v-if="adminComponent === 'Destinations'" />
+        <AdminAddDestination v-if="adminComponent === 'Add Destinations'" />
+        <AdminGallery v-if="adminComponent === 'Gallery'" />
+        <AdminCategory v-if="adminComponent === 'Categories'" />
+        <AdminAddCategory v-if="adminComponent === 'Add Category'" />
 
     </div>
 </template>
@@ -18,6 +23,8 @@ import Dashboard from './Dashboard.vue';
 const bcId = useCookie('bcId', { sameSite: 'lax' })
 const bcName = useCookie('bcName', { sameSite: 'lax' })
 const bcEmail = useCookie('bcEmail', { sameSite: 'lax' })
+
+const adminComponent = useCookie('adminComponent', { sameSite: 'lax' })
 
 const items = [
     [
@@ -67,7 +74,7 @@ const getShortName = (name) => {
 
         @media (prefers-color-scheme: 'dark') {
             background-color: #333333;
-            border-right: 1px solid #3d3d3d;
+            border-bottom: 1px solid #3d3d3d;
         }
 
         h2 {

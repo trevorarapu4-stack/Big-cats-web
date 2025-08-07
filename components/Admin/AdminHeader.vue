@@ -7,18 +7,15 @@
             </div>
 
             <div class="jumps">
-                <UButton icon="solar:chart-2-bold-duotone" color="primary" variant="solid" label="Dashboard" />
-                <UButton icon="solar:notebook-minimalistic-bold-duotone" color="neutral" variant="ghost"
-                    label="Itineraries" />
-                <UButton icon="solar:info-circle-bold-duotone" color="neutral" variant="ghost" label="Blogs" />
-                <UButton icon="solar:pen-new-square-bold-duotone" color="neutral" variant="ghost" label="Reviews" />
-                <UButton icon="solar:gallery-edit-bold-duotone" color="neutral" variant="ghost" label="Gallery" />
-                <UButton icon="solar:add-folder-bold-duotone" color="neutral" variant="ghost" label="Categories" />
-                <UButton icon="solar:pin-bold-duotone" color="neutral" variant="ghost" label="Destinations" />
-                <UButton icon="solar:users-group-rounded-bold-duotone" color="neutral" variant="ghost"
-                    label="Members" />
-                <UButton @click="forAuth.logOutUser" icon="solar:lock-keyhole-minimalistic-bold-duotone" color="error" variant="ghost"
-                    label="Log out" />
+                <UButton icon="solar:chart-2-bold-duotone" @click="adminComponent = 'Dashboard'" :color="adminComponent !== 'Dashboard'? 'neutral':'primary'" :variant="adminComponent !== 'Dashboard'? 'ghost':'solid'" label="Dashboard" />
+                <UButton icon="solar:notebook-minimalistic-bold-duotone" @click="adminComponent = 'Itineraries'" :color="adminComponent !== 'Itineraries'? 'neutral':'primary'" :variant="adminComponent !== 'Itineraries'? 'ghost':'solid'" label="Itineraries" />
+                <UButton icon="solar:info-circle-bold-duotone" @click="adminComponent = 'Blogs'" :color="adminComponent !== 'Blogs'? 'neutral':'primary'" :variant="adminComponent !== 'Blogs'? 'ghost':'solid'" label="Blogs" />
+                <UButton icon="solar:pen-new-square-bold-duotone" @click="adminComponent = 'Reviews'" :color="adminComponent !== 'Reviews'? 'neutral':'primary'" :variant="adminComponent !== 'Reviews'? 'ghost':'solid'" label="Reviews" />
+                <UButton icon="solar:gallery-edit-bold-duotone" @click="adminComponent = 'Gallery'" :color="adminComponent !== 'Gallery'? 'neutral':'primary'" :variant="adminComponent !== 'Gallery'? 'ghost':'solid'" label="Gallery" />
+                <UButton icon="solar:add-folder-bold-duotone" @click="adminComponent = 'Categories'" :color="adminComponent !== 'Categories'? 'neutral':'primary'" :variant="adminComponent !== 'Categories'? 'ghost':'solid'" label="Categories" />
+                <UButton icon="solar:pin-bold-duotone" @click="adminComponent = 'Destinations'" :color="adminComponent !== 'Destinations'? 'neutral':'primary'" :variant="adminComponent !== 'Destinations'? 'ghost':'solid'" label="Destinations" />
+                <UButton icon="solar:users-group-rounded-bold-duotone" @click="adminComponent = 'Members'" :color="adminComponent !== 'Members'? 'neutral':'primary'" :variant="adminComponent !== 'Members'? 'ghost':'solid'" label="Members" />
+                <UButton @click="forAuth.logOutUser" icon="solar:lock-keyhole-minimalistic-bold-duotone" color="error" variant="ghost" label="Log out" />
             </div>
         </div>
 
@@ -33,6 +30,12 @@ const goHome = () => {
 }
 
 const forAuth = useAuth()
+
+const adminComponent = useCookie('adminComponent', { sameSite: 'lax' })
+
+onMounted(() => {
+    adminComponent.value = 'Dashboard'
+})
 
 </script>
 

@@ -2,13 +2,6 @@
     <div class="adminInterface">
         <admin-header />
         <MainInterface />
-
-        <UModal v-model:open="isOpenModal" >
-            <template #content>
-                <div class="h-48 m-4" ></div>
-            </template>
-        </UModal>
-
     </div>
 </template>
 
@@ -18,8 +11,6 @@ import MainInterface from '~/components/Admin/MainInterface.vue';
 definePageMeta({
     layout: 'admin'
 })
-
-const isOpenModal = ref(true)
 
 </script>
 

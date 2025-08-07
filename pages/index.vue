@@ -1,6 +1,7 @@
 <template>
     <div>
         <HeroSection />
+        <HomeDestinations />
     </div>
 </template>
 

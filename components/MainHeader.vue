@@ -32,8 +32,8 @@
                     <a href="http://">
                         <Icon name="entypo-social:linkedin-with-circle" />
                     </a>
-                    <Icon @click="toggleLoginForm" v-if="!bcId" name="solar:shield-bold-duotone" />
-                    <Icon @click="goToAdmin" v-else name="solar:user-circle-bold-duotone" />
+                    <Icon @click="toggleLoginForm" v-if="!bcId" name="solar:shield-bold-duotone" class="adminBtn" />
+                    <Icon @click="goToAdmin" v-else name="solar:user-circle-bold-duotone" class="adminBtn" />
                 </div>
             </div>
             <div class="nav">
@@ -47,7 +47,7 @@
                     <nuxt-link to="#">Tours</nuxt-link>
                     <nuxt-link to="#">Destinations</nuxt-link>
                     <nuxt-link to="#">Categories</nuxt-link>
-                    <nuxt-link to="#">Gallery</nuxt-link>
+                    <nuxt-link to="/gallery">Gallery</nuxt-link>
                 </div>
                 <UButton>Contact us</UButton>
             </div>
@@ -76,6 +76,10 @@ const goToAdmin = () => {
     .inner {
         background-color: #ffffff;
 
+        @media (prefers-color-scheme: 'dark') {
+            background-color: #1f1f1f;
+        }
+
         .top {
             display: flex;
             align-items: center;
@@ -85,10 +89,14 @@ const goToAdmin = () => {
             padding: 0.5rem 1rem;
             border-bottom: 1px solid #eeeeee;
 
+            @media (prefers-color-scheme: 'dark') {
+                border-bottom: 1px solid #3d3d3d;
+            }
+
             .left {
                 display: flex;
                 align-items: center;
-                gap: 3rem;
+                gap: 30%;
 
                 a {
                     display: flex;
@@ -97,11 +105,12 @@ const goToAdmin = () => {
                     span {
                         margin-right: 0.5rem;
                         color: var(--color-orange-500);
-                        font-size: 1.5rem;
+                        font-size: 1rem;
                     }
 
                     p {
                         font-size: 0.9rem;
+                        text-wrap: nowrap;
                     }
                 }
             }
@@ -136,11 +145,16 @@ const goToAdmin = () => {
 
                     span {
                         color: #000000;
+                        font-size: 1.3rem;
+
+                        @media (prefers-color-scheme: 'dark') {
+                            color: #ffffff;
+                        }
                     }
                 }
 
-                span {
-                    font-size: 1.2rem;
+                .adminBtn {
+                    font-size: 1.5rem;
                     cursor: pointer;
                     color: var(--color-orange-500);
                 }
@@ -167,6 +181,10 @@ const goToAdmin = () => {
                 display: flex;
                 align-items: center;
                 gap: 2rem;
+
+                .router-link-exact-active {
+                    color: var(--color-orange-500);
+                }
             }
         }
     }
