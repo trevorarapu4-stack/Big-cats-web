@@ -57,7 +57,7 @@ export const useImageUpload = () => {
             // console.log(`${resp.url}?imagekitId=${resp.fileId}`)
             forLoader.removeLoader('@imagekitUploading')
             forNotifiers(true, 'Image upload was successfull')
-            return `${resp.url}?imagekitId=${resp.fileId}`
+            return `${resp.url}?imagekitId=${resp.fileId}?f-webp,q-90`
 
         } catch (err) {
             forLoader.removeLoader('@imagekitUploading')

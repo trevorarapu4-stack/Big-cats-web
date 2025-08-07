@@ -1,19 +1,7 @@
 <template>
     <div class="gallery">
         <div class="inner">
-            <div class="top" :style="{
-                backgroundImage: `url(/images/gallery.webp)`,
-                backgroundRepeat: 'no-repeat',
-                backgroundAttachment: 'fixed',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-            }">
-                <div class="cov">
-                    <h2>Big cats Safaris Gallery</h2>
-                    <p>Capturing Timeless Memories. A Photographic Journey with Big Cat Safaris</p>
-                </div>
-            </div>
-
+            <top-intro-section :intro-data="pageData" />
             <div class="next">
                 <div class="fir">
                     <h2>Moments from the Wild</h2>
@@ -33,6 +21,12 @@ import { useGallery } from '#imports';
 
 const forGallery = useGallery()
 const forGalleryList = computed(() => forGallery.allGallery)
+
+const pageData = ref({
+    image: '/images/gallery.webp',
+    heading: 'Big cats Safaris Gallery',
+    paragraph: 'Capturing Timeless Memories. A Photographic Journey with Big Cat Safaris'
+})
 
 </script>
 

@@ -13,6 +13,8 @@
         <AdminGallery v-if="adminComponent === 'Gallery'" />
         <AdminCategory v-if="adminComponent === 'Categories'" />
         <AdminAddCategory v-if="adminComponent === 'Add Category'" />
+        <AdminMembers v-if="adminComponent === 'Members'" />
+        <AdminAddMember v-if="adminComponent === 'Add Members'" />
 
     </div>
 </template>

@@ -42,14 +42,14 @@
                     <h3>Big Cat Safaris</h3>
                 </nuxt-link>
                 <div class="center">
-                    <nuxt-link to="#">Home</nuxt-link>
+                    <nuxt-link to="/">Home</nuxt-link>
                     <nuxt-link to="#">About</nuxt-link>
                     <nuxt-link to="#">Tours</nuxt-link>
                     <nuxt-link to="#">Destinations</nuxt-link>
                     <nuxt-link to="#">Categories</nuxt-link>
                     <nuxt-link to="/gallery">Gallery</nuxt-link>
                 </div>
-                <UButton>Contact us</UButton>
+                <UButton to="/contact" >Contact us</UButton>
             </div>
         </div>
     </div>
