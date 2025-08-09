@@ -11,6 +11,9 @@
                 <div class="list">
                     <img v-for="value in forGalleryList" :key="value.$id" :src="value.image" :alt="value.name">
                 </div>
+
+                <UPagination v-model:page="page" :total="100" />
+
             </div>
         </div>
     </div>
@@ -21,6 +24,8 @@ import { useGallery } from '#imports';
 
 const forGallery = useGallery()
 const forGalleryList = computed(() => forGallery.allGallery)
+
+const page = ref(5)
 
 const pageData = ref({
     image: '/images/gallery.webp',

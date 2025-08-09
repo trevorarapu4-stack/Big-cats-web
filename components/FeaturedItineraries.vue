@@ -92,7 +92,7 @@ const forItinerariesList = computed(() => forItineraries.allItineraries)
                 }
 
                 .info {
-                    padding: 1rem;
+                    padding: 1.5rem;
                     position: relative;
 
                     display: flex;

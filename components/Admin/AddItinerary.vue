@@ -11,6 +11,14 @@
                     <UInputNumber v-model="itineraryForm.cost" class="w-full" />
                 </UFormField>
             </div>
+            <div class="info">
+                <UFormField label="Categories" class="mt-5">
+                    <USelectMenu v-model="itineraryForm.categories" multiple :items="catNames" class="w-full" />
+                </UFormField>
+                <UFormField label="Destinations" class="mt-5">
+                    <USelectMenu v-model="itineraryForm.destinations" multiple :items="destNames" class="w-full" />
+                </UFormField>
+            </div>
             <UFormField label="Summary" class="mt-5">
                 <UTextarea placeholder="summary..." v-model="itineraryForm.summary" class="w-full" autoresize />
             </UFormField>
@@ -46,6 +54,25 @@
 <script setup>
 import { useLoader } from '#imports';
 import { Ckeditor, useCKEditorCloud } from '@ckeditor/ckeditor5-vue';
+import { useCategories, useDestinations } from '#imports';
+
+const forCategories = useCategories()
+const forCategoriesList = computed(() => forCategories.allCategories )
+
+const forDestinations = useDestinations()
+const forDestinationsList = computed(() => forDestinations.allDestinations )
+
+const catNames = ref([])
+const destNames = ref([])
+
+const getCatsAndNames = () => {
+    for (const ele of forCategoriesList.value) {
+        catNames.value.push(ele.title)
+    }
+    for (const ele of forDestinationsList.value) {
+        destNames.value.push(ele.title)
+    }
+}
 
 // editor
 const cloud = useCKEditorCloud({
@@ -333,6 +360,8 @@ const itineraryForm = ref({
     includes: '',
     bring: '',
     extra: '',
+    categories: [],
+    destinations: [],
     cost: 0
 })
 
@@ -403,6 +432,10 @@ const uploadData = async () => {
         forNotifier(false, error.message)
     }
 }
+
+onMounted(() => {
+    getCatsAndNames()
+})
 
 </script>
 

@@ -218,6 +218,10 @@ onMounted(() => {
             right: 0;
             z-index: 3;
             background-color: #ffffff;
+
+            @media (prefers-color-scheme: dark) {
+                background-color: rgb(29, 29, 29);
+            }
         }
     }
 }

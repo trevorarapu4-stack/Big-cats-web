@@ -13,22 +13,22 @@
             </div>
             <div class="center">
                 <div class="one">
+                    <h3>Company</h3>
+                    <div class="jumps">
+                        <nuxt-link to="/" >About us</nuxt-link>
+                        <nuxt-link to="/contact" >Contact us</nuxt-link>
+                        <nuxt-link to="/" >Our clients reviews</nuxt-link>
+                        <nuxt-link to="/reviewBigCatSafaris" >Review Big Cat Safaris</nuxt-link>
+                        <u-button class="mt-4 w-fit" icon="solar:shield-bold-duotone" variant="outline" color="neutral" label="Log in" />
+                    </div>
+                </div>
+                <div class="one">
                     <h3>For You</h3>
                     <div class="jumps">
                         <nuxt-link to="/categories" >Categories</nuxt-link>
                         <nuxt-link to="/destinations" >Destinations</nuxt-link>
                         <nuxt-link to="/" >Our Blog</nuxt-link>
                         <nuxt-link to="/" >Tour packages</nuxt-link>
-                    </div>
-                </div>
-                <div class="one">
-                    <h3>Company</h3>
-                    <div class="jumps">
-                        <nuxt-link to="/" >About us</nuxt-link>
-                        <nuxt-link to="/" >Contact us</nuxt-link>
-                        <nuxt-link to="/" >Our clients reviews</nuxt-link>
-                        <nuxt-link to="/reviewBigCatSafaris" >Review Big Cat Safaris</nuxt-link>
-                        <u-button class="mt-4 w-fit" icon="solar:shield-bold-duotone" variant="outline" color="neutral" label="Log in" />
                     </div>
                 </div>
                 <div class="one">
