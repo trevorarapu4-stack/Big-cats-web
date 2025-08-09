@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
 
-export const useGallery = defineStore('dataStoreUseGallery', ({
+export const useReviews = defineStore('dataStoreUseReviews', ({
     state: () => ({
-        allGallery: []
+        allReviews: []
     }),
 
     actions: {
-        async fetchAndWatchGallery() {
+        async fetchAndWatchReviews() {
 
             const { database, Query, client } = useAppwrite()
             const forLoader = useLoader()
@@ -17,7 +17,7 @@ export const useGallery = defineStore('dataStoreUseGallery', ({
 
             try {
 
-                forLoader.showLoader('@fetchingGallery', 'Please wait', 'Still working on getting gallery pictures')
+                forLoader.showLoader('@fetchingReviews', 'Please wait', 'Still working on getting reviews')
                 while (hasMore) {
                     const query = [Query.limit(100)];
                     if (lastId) {
@@ -26,7 +26,7 @@ export const useGallery = defineStore('dataStoreUseGallery', ({
 
                     const response = await database.listDocuments(
                         useRuntimeConfig().public.APPWRITE_DB_ID,
-                        useRuntimeConfig().public.APPWRITE_GALLERY_COLL_ID,
+                        useRuntimeConfig().public.APPWRITE_REVIEWS_COLL_ID,
                         query
                     );
 
@@ -41,33 +41,33 @@ export const useGallery = defineStore('dataStoreUseGallery', ({
                     }
                 }
 
-                forLoader.removeLoader('@fetchingGallery')
-                this.allGallery = allDocuments;
+                forLoader.removeLoader('@fetchingReviews')
+                this.allReviews = allDocuments;
 
                 client.subscribe(
-                    `databases.${useRuntimeConfig().public.APPWRITE_DB_ID}.collections.${useRuntimeConfig().public.APPWRITE_GALLERY_COLL_ID}.documents`,
+                    `databases.${useRuntimeConfig().public.APPWRITE_DB_ID}.collections.${useRuntimeConfig().public.APPWRITE_REVIEWS_COLL_ID}.documents`,
                     (response) => {
                         const document = response.payload;
                         if (response.events.includes('databases.*.collections.*.documents.*.create')) {
-                            const there = this.allGallery.some( doc => doc.$id === document.$id )
+                            const there = this.allReviews.some(doc => doc.$id === document.$id)
                             if (!there) {
-                                this.allGallery.push(document);
+                                this.allReviews.push(document);
                             }
                         }
                         if (response.events.includes('databases.*.collections.*.documents.*.update')) {
-                            const index = this.allGallery.findIndex(doc => doc.$id === document.$id);
+                            const index = this.allReviews.findIndex(doc => doc.$id === document.$id);
                             if (index !== -1) {
-                                this.allGallery[index] = document;
+                                this.allReviews[index] = document;
                             }
                         }
                         if (response.events.includes('databases.*.collections.*.documents.*.delete')) {
-                            this.allGallery = this.allGallery.filter(doc => doc.$id !== document.$id);
+                            this.allReviews = this.allReviews.filter(doc => doc.$id !== document.$id);
                         }
                     }
                 );
 
             } catch (error) {
-                forLoader.removeLoader('@fetchingGallery')
+                forLoader.removeLoader('@fetchingReviews')
                 console.error('Failed to fetch data:', error);
             }
         }

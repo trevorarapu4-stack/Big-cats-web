@@ -49,7 +49,10 @@ export const useDestinations = defineStore('dataStoreUseDestinations', ({
                     (response) => {
                         const document = response.payload;
                         if (response.events.includes('databases.*.collections.*.documents.*.create')) {
-                            this.allDestinations.push(document);
+                            const there = this.allDestinations.some(doc => doc.$id === document.$id)
+                            if (!there) {
+                                this.allDestinations.push(document);
+                            }
                         }
                         if (response.events.includes('databases.*.collections.*.documents.*.update')) {
                             const index = this.allDestinations.findIndex(doc => doc.$id === document.$id);

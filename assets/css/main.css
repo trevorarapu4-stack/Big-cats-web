@@ -1,5 +1,10 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+@media print {
+    body {
+        margin: 0 !important;
+    }
+}
 
 @theme static {
 
@@ -24,6 +29,7 @@
     box-sizing: border-box;
     font-family: 'Outfit';
     transition: 0.4s;
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -41,4 +47,19 @@ p {
 
 button {
     cursor: pointer;
+}
+
+:root {
+    --ck-content-font-family: 'Lato';
+}
+
+.main-container {
+    font-family: var(--ck-content-font-family);
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.editor-container_classic-editor .editor-container__editor {
+    max-width: 800px;
 }

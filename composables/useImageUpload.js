@@ -83,7 +83,34 @@ export const useImageUpload = () => {
         }
     }
 
+    async function deleteExistingImage(url) {
+
+        if (url) {
+            forLoader.showLoader('@deletingExistingImg', 'Replacing Image', 'We found that the profile aleady has an image so we are removing the old one')
+            const profileImageParams = new URL(url)
+            const imagekitId = profileImageParams.searchParams.get('imagekitId')
+
+            try {
+                const { data } = await $fetch('/api/deleteImagekitImg', {
+                    method: 'post',
+                    body: { fileId: imagekitId }
+                })
+                console.log(data)
+                forLoader.removeLoader('@deletingExistingImg')
+
+            } catch (error) {
+                console.log(error)
+            }
+            forLoader.removeLoader('@deletingExistingImg')
+
+        } else {
+            console.log('no image present')
+        }
+
+    }
+
     return {
-        handleUpload
+        handleUpload,
+        deleteExistingImage
     }
 }

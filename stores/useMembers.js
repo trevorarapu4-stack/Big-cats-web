@@ -49,7 +49,10 @@ export const useMembers = defineStore('dataStoreUseMembers', ({
                     (response) => {
                         const document = response.payload;
                         if (response.events.includes('databases.*.collections.*.documents.*.create')) {
-                            this.allMembers.push(document);
+                            const there = this.allMembers.some( doc => doc.$id === document.$id )
+                            if (!there) {
+                                this.allMembers.push(document);
+                            }
                         }
                         if (response.events.includes('databases.*.collections.*.documents.*.update')) {
                             const index = this.allMembers.findIndex(doc => doc.$id === document.$id);

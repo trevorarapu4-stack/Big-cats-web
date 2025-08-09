@@ -49,7 +49,10 @@ export const useCategories = defineStore('dataStoreUseCategories', ({
                     (response) => {
                         const document = response.payload;
                         if (response.events.includes('databases.*.collections.*.documents.*.create')) {
-                            this.allCategories.push(document);
+                            const there = this.allCategories.some( doc => doc.$id === document.$id )
+                            if (!there) {
+                                this.allCategories.push(document);
+                            }
                         }
                         if (response.events.includes('databases.*.collections.*.documents.*.update')) {
                             const index = this.allCategories.findIndex(doc => doc.$id === document.$id);

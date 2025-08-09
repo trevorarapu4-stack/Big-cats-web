@@ -10,13 +10,13 @@
             <h2>Welcome {{ bcName }}</h2>
         </div>
         <div class="inner">
-            <div class="each">
+            <div class="each" @click="adminComponent = 'Itineraries'" >
                 <div class="top">
                     <Icon name="solar:notebook-minimalistic-bold-duotone" />
                     <p>Itineraries</p>
                 </div>
                 <div class="bot">
-                    <h1>29</h1>
+                    <h1>{{ forItinerariesNum }}</h1>
                 </div>
             </div>
             <div class="each">
@@ -25,7 +25,7 @@
                     <p>Blogs</p>
                 </div>
                 <div class="bot">
-                    <h1>13</h1>
+                    <h1>{{ forBlogsNum }}</h1>
                 </div>
             </div>
             <div class="each">
@@ -34,7 +34,7 @@
                     <p>Reviews</p>
                 </div>
                 <div class="bot">
-                    <h1>8</h1>
+                    <h1>{{ forReviewsNum }}</h1>
                 </div>
             </div>
             <div class="each" @click="adminComponent = 'Gallery'" >
@@ -64,13 +64,13 @@
                     <h1>{{ forDestinationsNum }}</h1>
                 </div>
             </div>
-            <div class="each">
+            <div class="each" @click="adminComponent = 'Members'" >
                 <div class="top">
                     <Icon name="solar:users-group-rounded-bold-duotone" />
                     <p>Members</p>
                 </div>
                 <div class="bot">
-                    <h1>4</h1>
+                    <h1>{{ forMembersNum }}</h1>
                 </div>
             </div>
         </div>
@@ -82,6 +82,10 @@ import { url } from 'valibot';
 import { useDestinations } from '#imports';
 import { useGallery } from '#imports';
 import { useCategories } from '#imports';
+import { useMembers } from '#imports';
+import { useItineraries } from '#imports';
+import { useBlogs } from '#imports';
+import { useReviews } from '#imports';
 
 const forDestinations = useDestinations()
 const forDestinationsNum = computed(() => forDestinations.allDestinations.length )
@@ -92,9 +96,19 @@ const forGalleryNum = computed(() => forGallery.allGallery.length )
 const forCategories = useCategories()
 const forCategoriesNum = computed(() => forCategories.allCategories.length )
 
-const bcId = useCookie('bcId', { sameSite: 'lax' })
+const forMembers = useMembers()
+const forMembersNum = computed(() => forMembers.allMembers.length )
+
+const forItineraries = useItineraries()
+const forItinerariesNum = computed(() => forItineraries.allItineraries.length )
+
+const forBlogs = useBlogs()
+const forBlogsNum = computed(() => forBlogs.blogs.length )
+
+const forReviews = useReviews()
+const forReviewsNum = computed(() => forReviews.allReviews.length )
+
 const bcName = useCookie('bcName', { sameSite: 'lax' })
-const bcEmail = useCookie('bcEmail', { sameSite: 'lax' })
 const adminComponent = useCookie('adminComponent', { sameSite: 'lax' })
 
 </script>

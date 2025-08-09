@@ -36,7 +36,7 @@
                     <Icon @click="goToAdmin" v-else name="solar:user-circle-bold-duotone" class="adminBtn" />
                 </div>
             </div>
-            <div class="nav">
+            <div class="nav" :class="hasScrolledPast100 ? 'moved' : ''">
                 <nuxt-link to="/" class="homeLink">
                     <img src="/public/logo/logo.png" alt="big cat safari">
                     <h3>Big Cat Safaris</h3>
@@ -45,11 +45,11 @@
                     <nuxt-link to="/">Home</nuxt-link>
                     <nuxt-link to="#">About</nuxt-link>
                     <nuxt-link to="#">Tours</nuxt-link>
-                    <nuxt-link to="#">Destinations</nuxt-link>
-                    <nuxt-link to="#">Categories</nuxt-link>
+                    <nuxt-link to="/destinations">Destinations</nuxt-link>
+                    <nuxt-link to="/categories">Categories</nuxt-link>
                     <nuxt-link to="/gallery">Gallery</nuxt-link>
                 </div>
-                <UButton to="/contact" >Contact us</UButton>
+                <UButton to="/contact">Contact us</UButton>
             </div>
         </div>
     </div>
@@ -69,12 +69,28 @@ const goToAdmin = () => {
     router.push('/admin')
 }
 
+const hasScrolledPast100 = ref(false);
+
+function handleScroll() {
+    if (window.scrollY >= 40 && !hasScrolledPast100.value) {
+        hasScrolledPast100.value = true;
+    }
+    else if (window.scrollY < 40 && hasScrolledPast100.value) {
+        hasScrolledPast100.value = false;
+    }
+}
+
+onMounted(() => {
+    window.addEventListener("scroll", handleScroll);
+})
+
 </script>
 
 <style lang="scss" scoped>
 .mainHeader {
     .inner {
         background-color: #ffffff;
+        height: 100px;
 
         @media (prefers-color-scheme: 'dark') {
             background-color: #1f1f1f;
@@ -166,6 +182,13 @@ const goToAdmin = () => {
             align-items: center;
             justify-content: space-between;
             padding: 0.5rem 1rem;
+            background-color: #ffffff;
+            border-bottom: 1px solid #eeeeee;
+
+            @media (prefers-color-scheme: 'dark') {
+                background-color: #1f1f1f;
+                border-bottom: 1px solid #333333;
+            }
 
             .homeLink {
                 display: flex;
@@ -186,6 +209,15 @@ const goToAdmin = () => {
                     color: var(--color-orange-500);
                 }
             }
+        }
+
+        .moved {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 3;
+            background-color: #ffffff;
         }
     }
 }

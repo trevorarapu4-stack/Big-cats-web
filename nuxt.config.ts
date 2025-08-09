@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     'nuxt-appwrite',
     '@pinia/nuxt',
     'nuxt-swiper',
+    'nuxt-marquee',
   ],
   appwrite: {
     endpoint: 'https://fra.cloud.appwrite.io/v1',
@@ -28,6 +29,9 @@ export default defineNuxtConfig({
       APPWRITE_CATEGORIES_COLL_ID: process.env.APPWRITE_CATEGORIES_COLL_ID,
       APPWRITE_MEMBERS_COLL_ID: process.env.APPWRITE_MEMBERS_COLL_ID,
       CKEDITOR_LICENSE_KEY: process.env.CKEDITOR_LICENSE_KEY,
+      APPWRITE_ITINERARIES_COLL_ID: process.env.APPWRITE_ITINERARIES_COLL_ID,
+      APPWRITE_BLOGS_COLL_ID: process.env.APPWRITE_BLOGS_COLL_ID,
+      APPWRITE_REVIEWS_COLL_ID: process.env.APPWRITE_REVIEWS_COLL_ID,
     },
     IMAGEKIT_PRIVATE_KEY: process.env.IMAGEKIT_PRIVATE_KEY
   },

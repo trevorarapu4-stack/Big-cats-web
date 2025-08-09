@@ -2,6 +2,7 @@
     <div>
         <HeroSection />
         <HomeDestinations />
+        <FeaturedItineraries />
     </div>
 </template>
 

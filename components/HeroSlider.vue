@@ -70,7 +70,7 @@ onMounted(() => {
             justify-content: center;
             align-items: center;
             font-size: 18px;
-            height: 60vh;
+            height: 500px;
             font-size: 4rem;
             font-weight: bold;
 

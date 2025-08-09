@@ -63,7 +63,7 @@
                             autoresize />
 
                     </UFormField>
-                    <UButton label="Send Message" />
+                    <UButton label="Send Message" class="w-fit" />
                 </div>
 
             </div>

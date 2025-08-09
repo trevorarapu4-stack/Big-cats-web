@@ -1,15 +1,14 @@
 <template>
-    <div class="members">
-        <div class="list" v-if="forMembersList.length > 0">
-            <UCard v-for="value in forMembersList" :key="value.$id">
+    <div class="itineraries">
+        <div class="list" v-if="forBlogsList?.length > 0">
+            <UCard v-for="value in forBlogsList" :key="value.$id">
                 <template #header>
-                    <h3>{{ value.name }}</h3>
+                    <h3>{{ value.title }}</h3>
                 </template>
 
                 <template #default>
                     <img :src="value.image" :alt="value.title">
-                    <p>{{ value.position }}</p>
-                    <div class='aboutLog' v-html="value.about" ></div>
+                    <p>{{ value.summary }}</p>
                 </template>
 
                 <template #footer>
@@ -20,16 +19,17 @@
                 </template>
             </UCard>
         </div>
-        <empty-section section="Members" v-else />
+        <empty-section section="Blogs" v-else />
         <div class="addButton">
-            <UButton @click="adminComponent = 'Add Members'" icon="solar:add-circle-bold-duotone" label="Add New Member" />
+            <UButton @click="adminComponent = 'Add Blog'" icon="solar:add-circle-bold-duotone"
+                label="Add New Blog" />
         </div>
 
         <UModal v-model:open="isDeleteModal" :ui="{ footer: 'justify-end' }">
             <template #header>
                 <div class="to">
-                    <h3>Delete Members</h3>
-                    <p>Would you like to delete the member {{ docToDelete?.name }}.</p>
+                    <h3>Delete Blog</h3>
+                    <p>Would you like to delete the blog {{ docToDelete?.title }}.</p>
                 </div>
             </template>
 
@@ -47,10 +47,10 @@
 </template>
 
 <script setup>
-import { useMembers } from '#imports';
+import { useBlogs } from '#imports';
 
-const forMembers = useMembers()
-const forMembersList = computed(() => forMembers.allMembers)
+const forBlogs = useBlogs()
+const forBlogsList = computed(() => forBlogs.blogs)
 const adminComponent = useCookie('adminComponent', { sameSite: 'lax' })
 
 const docToDelete = ref(null)
@@ -63,7 +63,7 @@ const initialDelete = (doc) => {
 </script>
 
 <style lang="scss" scoped>
-.members {
+.itineraries {
     position: relative;
     max-width: 1000px;
     margin: auto;
@@ -92,17 +92,6 @@ const initialDelete = (doc) => {
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
-        .aboutLog {
-            :deep(p) {
-                font-size: 1rem;
-                line-clamp: 2;
-                -webkit-line-clamp: 2;
-                overflow: hidden;
-                -webkit-box-orient: vertical;
-                display: -webkit-box;
-            }
-        }
     }
 
     .addButton {
@@ -126,5 +115,4 @@ const initialDelete = (doc) => {
 .delImg {
     border-radius: var(--ui-radius);
 }
-
 </style>
