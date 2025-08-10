@@ -27,11 +27,11 @@
                 </div>
             </div>
             <div class="miss">
-
                 <p>Rita pursued her studies at the University of Tourism, Technology, and Business Studies, where
                     she obtained her degree in travel and tourism management.</p>
                 <p>Big Cat Safaris delivers an unforgettable experience in English, French, Chinese, Swahili, and Kinyarwanda.</p>
             </div>
+            <the-team />
             <div class="miss">
                 <h2>Our Goal</h2>
                 <p>Our goal is to provide personalized itineraries for our guests, striving to spot the Big Five,
@@ -56,7 +56,7 @@ const pageData = ref({
 <style lang="scss" scoped>
 .about {
     .inner {
-        max-width: 1100px;
+        max-width: 1000px;
         margin: auto;
         padding: 2rem 1rem;
 

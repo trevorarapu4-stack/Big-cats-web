@@ -4,7 +4,7 @@
 
         <div class="inner">
             <div class="list">
-                <UCard v-for="value in forItinerariesList" :key="value.$id">
+                <UCard v-for="value in forItinerariesList" :key="value.$id" @click="goToTour(value.$id)" style="cursor: pointer;" >
                     <template #header>
                         <h3>{{ value.title }}</h3>
                     </template>
@@ -31,6 +31,11 @@ import { useItineraries } from '#imports';
 
 const forItineraries = useItineraries()
 const forItinerariesList = computed(() => forItineraries.allItineraries)
+const router = useRouter()
+
+const goToTour = (id) => {
+    router.push(`/tour-${id}`)
+}
 
 const pageData = ref({
     image: '/images/tours.webp',

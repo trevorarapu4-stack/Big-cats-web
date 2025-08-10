@@ -19,6 +19,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "ckeditor5": "^46.0.0",
     "imagekit": "^6.0.0",
+    "marked": "^16.1.2",
     "nuxt": "^4.0.1",
     "nuxt-appwrite": "^1.2.0",
     "nuxt-marquee": "^1.0.4",

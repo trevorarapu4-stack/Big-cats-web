@@ -3,6 +3,7 @@
         <HeroSection />
         <HomeDestinations />
         <FeaturedItineraries />
+        <TheTeam />
     </div>
 </template>
 
