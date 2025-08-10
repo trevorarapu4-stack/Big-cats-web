@@ -2,7 +2,8 @@ import { defineStore } from "pinia";
 
 export const useItineraries = defineStore('dataStoreUseItineraries', ({
     state: () => ({
-        allItineraries: []
+        allItineraries: [],
+        singleItinerary: null
     }),
 
     actions: {
@@ -69,6 +70,14 @@ export const useItineraries = defineStore('dataStoreUseItineraries', ({
             } catch (error) {
                 forLoader.removeLoader('@fetchingItineraries')
                 console.error('Failed to fetch data:', error);
+            }
+        },
+
+        setItinerary(id) {
+            const found = this.allItineraries.find( iti => iti.$id === id )
+            console.log(found)
+            if(found) {
+                this.singleItinerary = found
             }
         }
     }

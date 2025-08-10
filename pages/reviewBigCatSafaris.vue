@@ -8,7 +8,7 @@
             </div>
             <div class="list">
 
-                <UFormField label="Stars" name="stars">
+                <UFormField label="Rating" name="rating">
                     <div class="stars">
                         <Icon name="solar:star-circle-bold-duotone" @click="reviewForm.stars = 1"
                             :class="reviewForm.stars > 0 ? 'active' : ''" />

@@ -17,6 +17,7 @@
         <AdminAddMember v-if="adminComponent === 'Add Members'" />
         <AdminItineraries v-if="adminComponent === 'Itineraries'" />
         <AdminAddItinerary v-if="adminComponent === 'Add Itinerary'" />
+        <AdminEditItinerary v-if="adminComponent === 'Edit Itinerary'" />
         <AdminBlogs v-if="adminComponent === 'Blogs'" />
         <AdminAddBlog v-if="adminComponent === 'Add Blog'" />
         <AdminReviews v-if="adminComponent === 'Reviews'" />

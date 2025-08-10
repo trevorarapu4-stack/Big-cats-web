@@ -33,7 +33,7 @@
 }
 
 :root {
-    --ui-radius: 0.25rem;
+    --ui-radius: 0.3rem;
 }
 
 h1,
@@ -62,4 +62,35 @@ button {
 
 .editor-container_classic-editor .editor-container__editor {
     max-width: 800px;
+}
+
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    body::-webkit-scrollbar-track {
+        background: #1f1f1f;
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background: #cccccc;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+        background: #eeeeee;
+    }
 }

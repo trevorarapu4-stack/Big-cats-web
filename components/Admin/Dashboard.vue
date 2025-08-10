@@ -3,7 +3,7 @@
         <div class="top1" :style="{
             backgroundImage: `url(/admin/intro.webp)`,
             backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed',
+            backgroundAttachment: 'scroll',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
         }">
@@ -19,7 +19,7 @@
                     <h1>{{ forItinerariesNum }}</h1>
                 </div>
             </div>
-            <div class="each">
+            <div class="each" @click="adminComponent = 'Blogs'" >
                 <div class="top">
                     <Icon name="solar:info-circle-bold-duotone" />
                     <p>Blogs</p>
@@ -28,7 +28,7 @@
                     <h1>{{ forBlogsNum }}</h1>
                 </div>
             </div>
-            <div class="each">
+            <div class="each" @click="adminComponent = 'Reviews'" >
                 <div class="top">
                     <Icon name="solar:pen-new-square-bold-duotone" />
                     <p>Reviews</p>

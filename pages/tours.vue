@@ -1,16 +1,10 @@
 <template>
-    <div class="itineraries">
-        <div class="inner">
-            <div class="top">
-                <h2>Our Featured Tours</h2>
-                <div class="bott">
-                    <p>Many travellers like you love these tours</p>
-                    <u-button label="View all tours" />
-                </div>
-            </div>
+    <div class="tours">
+        <top-intro-section :intro-data="pageData" />
 
+        <div class="inner">
             <div class="list">
-                <UCard v-for="value in forItinerariesList.slice(0, 6)" :key="value.$id">
+                <UCard v-for="value in forItinerariesList" :key="value.$id">
                     <template #header>
                         <h3>{{ value.title }}</h3>
                     </template>
@@ -27,54 +21,36 @@
                         </div>
                     </template>
                 </UCard>
-
             </div>
-
         </div>
     </div>
 </template>
 
 <script setup>
-
 import { useItineraries } from '#imports';
 
 const forItineraries = useItineraries()
 const forItinerariesList = computed(() => forItineraries.allItineraries)
 
+const pageData = ref({
+    image: '/images/tours.webp',
+    heading: 'Big Cat Safaris Tour Packages',
+    paragraph: 'Browse our carefully crafted safari packages, each designed to offer unique experiences and lasting memories. Whether you’re seeking thrilling wildlife encounters or peaceful scenic escapes, we have the perfect package for you.'
+
+})
 </script>
 
 <style lang="scss" scoped>
-.itineraries {
-
-    background-color: hsl(from var(--color-orange-500) h s l / 0.1);
-    // background-color: rgba(0, 0, 0, 0.1);
-    margin: 5rem 0;
-
+.tours {
     .inner {
-        padding: 5rem 1rem;
-        max-width: 1000px;
-        margin: auto;
-
-        .top {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 4rem;
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            .bott {
-                display: flex;
-                justify-content: space-between;
-                width: 100%;
-            }
-        }
 
         .list {
             display: grid;
             gap: 1.5rem;
             grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+            max-width: 1050px;
+            margin: 3rem auto;
+            padding: 1rem;
 
             img {
                 width: 100%;

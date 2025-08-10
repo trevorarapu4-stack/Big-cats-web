@@ -43,8 +43,8 @@
                 </nuxt-link>
                 <div class="center">
                     <nuxt-link to="/">Home</nuxt-link>
-                    <nuxt-link to="#">About</nuxt-link>
-                    <nuxt-link to="#">Tours</nuxt-link>
+                    <nuxt-link to="/about">About</nuxt-link>
+                    <nuxt-link to="/tours">Tours</nuxt-link>
                     <nuxt-link to="/destinations">Destinations</nuxt-link>
                     <nuxt-link to="/categories">Categories</nuxt-link>
                     <nuxt-link to="/gallery">Gallery</nuxt-link>

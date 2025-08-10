@@ -13,7 +13,7 @@
 
                 <template #footer>
                     <div class="acts flex gap-4">
-                        <UButton color="neutral">Edit</UButton>
+                        <UButton color="neutral" @click="goToEdit(value.$id)" >Edit</UButton>
                         <UButton color="error" variant="outline" @click="initialDelete(value)">Delete</UButton>
                     </div>
                 </template>
@@ -52,6 +52,11 @@ import { useItineraries } from '#imports';
 const forItineraries = useItineraries()
 const forItinerariesList = computed(() => forItineraries.allItineraries)
 const adminComponent = useCookie('adminComponent', { sameSite: 'lax' })
+
+const goToEdit = (id) => {
+    forItineraries.setItinerary(id)
+    adminComponent.value = 'Edit Itinerary'
+}
 
 const docToDelete = ref(null)
 const isDeleteModal = ref(false)

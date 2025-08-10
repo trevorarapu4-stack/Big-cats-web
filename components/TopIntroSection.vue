@@ -2,7 +2,7 @@
     <div class="top" :style="{
         backgroundImage: `url(${props.introData.image})`,
         backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed',
+        backgroundAttachment: 'scroll',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
     }">
