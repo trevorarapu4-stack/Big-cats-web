@@ -3,18 +3,19 @@
         <template #body>
             <div class="steeps">
                 <div class="w-full innSte">
+                    <img class="demoImg" :src="forSingleItineraryData?.image" :alt="forSingleItineraryData?.title">
                     <UStepper ref="stepper" :items="items">
                         <template #content="{ item }">
                             <div class="stepCont">
                                 <!-- {{ item.title }} -->
                                 <div class="one" v-if="item.title === 'Your Tour'">
                                     <UFormField label="Package" name="package">
-                                        <UInput class="w-full" v-model="forNewBooking.tour" disabled />
+                                        <UInput class="w-full" v-model="forNewBooking.tour" disabled size="xl" />
                                     </UFormField>
                                     <UFormField label="Start Date" name="date">
                                         <UPopover>
                                             <UButton color="neutral" variant="subtle" icon="i-lucide-calendar"
-                                                class="w-full">
+                                                class="w-full" size="xl">
                                                 {{ modelValue ? df.format(modelValue.toDate(getLocalTimeZone())) :
                                                     'Select a date' }}
                                             </UButton>
@@ -25,23 +26,25 @@
                                         </UPopover>
                                     </UFormField>
                                     <UFormField label="Accomodation Type" name="Accomodation type">
-                                        <USelectMenu v-model="value" :items="itemss" class="w-full" />
+                                        <USelectMenu v-model="value" :items="itemss" class="w-full" size="xl" :popper="{ placement: 'bottom-start' }" />
                                     </UFormField>
                                 </div>
+
                                 <div class="one" v-if="item.title === 'Personal'">
                                     <UFormField label="Full Name" name="full name">
-                                        <UInput class="w-full" />
+                                        <UInput class="w-full" size="xl" />
                                     </UFormField>
                                     <UFormField label="Email" name="email">
-                                        <UInput class="w-full" />
+                                        <UInput class="w-full" size="xl" />
                                     </UFormField>
                                     <UFormField label="Country" name="country">
-                                        <USelectMenu v-model="value" :items="itemss" class="w-full" />
+                                        <USelectMenu v-model="value" :items="itemss" class="w-full" size="xl" />
                                     </UFormField>
                                 </div>
+
                                 <div class="one" v-if="item.title === 'Occupancy'">
-                                    <UFormField label="Number of Adults" name="adults" >
-                                        <UInputNumber v-model="valuez" class="w-full" :increment="{
+                                    <UFormField label="Number of Adults" name="adults">
+                                        <UInputNumber v-model="valuez" class="w-full" size="xl" :increment="{
                                             color: 'neutral',
                                             variant: 'solid',
                                             size: 'xs'
@@ -52,7 +55,7 @@
                                         }" />
                                     </UFormField>
                                     <UFormField label="Number of children" name="children">
-                                        <UInputNumber v-model="valuez" class="w-full" :increment="{
+                                        <UInputNumber v-model="valuez" class="w-full" size="xl" :increment="{
                                             color: 'neutral',
                                             variant: 'solid',
                                             size: 'xs'
@@ -62,8 +65,8 @@
                                             size: 'xs'
                                         }" />
                                     </UFormField>
-                                    <UFormField label="Anything else?" name="extra" >
-                                        <UTextarea v-model="value" autoresize class="w-full" />
+                                    <UFormField label="Anything else?" name="extra">
+                                        <UTextarea v-model="value" autoresize class="w-full" size="xl" />
                                     </UFormField>
                                 </div>
                             </div>
@@ -72,14 +75,11 @@
 
                     <div class="flex gap-2 justify-between mt-4">
                         <UButton leading-icon="i-lucide-arrow-left" :disabled="!stepper?.hasPrev"
-                            @click="stepper?.prev()">
-                            Prev
-                        </UButton>
+                            @click="stepper?.prev()" label="previous" color="neutral" />
 
                         <UButton trailing-icon="i-lucide-arrow-right" :disabled="!stepper?.hasNext"
-                            @click="stepper?.next()">
-                            Next
-                        </UButton>
+                            v-if="stepper?.hasNext" @click="stepper?.next()" label="Next" color="neutral" />
+                        <UButton @click="submitBooking" label="Send Booking" v-else />
                     </div>
                 </div>
             </div>
@@ -129,9 +129,13 @@ const forNewBooking = ref({
     tour: ''
 })
 
+const submitBooking = () => {
+    console.log(forNewBooking.value)
+}
+
 onMounted(() => {
     forNewBooking.value.tour = forSingleItineraryData.value?.title
-    
+
     watch(forSingleItineraryData, (newV) => {
         forNewBooking.value.tour = newV.title
     })
@@ -142,12 +146,20 @@ onMounted(() => {
 <style scoped lang="scss">
 .steeps {
     display: flex;
-    align-items: center;
+    // align-items: center;
     justify-content: center;
     height: 100%;
 
     .innSte {
         max-width: 700px;
+
+        .demoImg {
+            height: 150px;
+            width: 100%;
+            margin: 1rem 0;
+            object-fit: cover;
+            border-radius: var(--ui-radius);
+        }
 
         .stepCont {
             .one {

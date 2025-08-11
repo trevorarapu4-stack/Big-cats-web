@@ -28,8 +28,8 @@
     padding: 0; */
     box-sizing: border-box;
     font-family: 'Outfit';
-    transition: 0.4s;
-    scroll-behavior: smooth;
+    /* transition: 0.4s; */
+    /* scroll-behavior: smooth; */
 }
 
 :root {
@@ -63,6 +63,8 @@ button {
 .editor-container_classic-editor .editor-container__editor {
     max-width: 800px;
 }
+
+/* for the popper */
 
 body::-webkit-scrollbar {
     width: 10px;

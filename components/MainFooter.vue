@@ -35,7 +35,7 @@
                 <div class="one">
                     <h3>Legal</h3>
                     <div class="jumps">
-                        <nuxt-link to="/" >Terms of service</nuxt-link>
+                        <nuxt-link to="/terms" >Terms of service</nuxt-link>
                         <nuxt-link to="/" >Privacy</nuxt-link>
                     </div>
                 </div>

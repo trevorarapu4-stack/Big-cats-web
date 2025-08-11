@@ -5,7 +5,7 @@
                 <h2>Meet the team</h2>
                 <p>Get to know the Big Cat Safaris guides</p>
             </div>
-            <div class="list">
+            <div class="list" :class="props.isHome?'atHome':''" >
                 <div class="one" v-for="value in forMembersList" :key="value.$id">
                     <img :src="value.image" :alt="value.name">
                     <div class="info">
@@ -24,11 +24,13 @@ import { useMembers } from '#imports';
 const forMembers = useMembers()
 const forMembersList = computed(() => forMembers.allMembers)
 
+const props = defineProps([ 'isHome' ])
+
 </script>
 
 <style lang="scss" scoped>
 .mems {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: auto;
 
     .inner {
@@ -74,6 +76,12 @@ const forMembersList = computed(() => forMembers.allMembers)
                     }
                 }
             }
+        }
+
+        .atHome {
+            background-color: hsl(from var(--color-orange-500) h s l / 0.1);
+            padding: 2rem;
+            border-radius: var(--ui-radius);
         }
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div class="top" :style="{
-        backgroundImage: `url(${props.introData.image})`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, ${darknessLevel}), rgba(0, 0, 0, ${darknessLevel})), url(${props.introData.image})`,
         backgroundRepeat: 'no-repeat',
         backgroundAttachment: 'scroll',
         backgroundSize: 'cover',
@@ -16,6 +16,7 @@
 <script setup>
 
 const props = defineProps(['introData'])
+const darknessLevel = 0.3
 
 </script>
 

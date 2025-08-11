@@ -20,7 +20,7 @@ import { useSingleItinerary } from '#imports';
 const forSingleItinerary = useSingleItinerary()
 const forSingleItineraryData = computed(() => forSingleItinerary.singleItinerary)
 
-const darknessLevel = 0.7 // 0 = no darkness, 1 = completely black
+const darknessLevel = 0.7
 
 
 </script>

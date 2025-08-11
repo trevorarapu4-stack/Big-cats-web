@@ -3,7 +3,11 @@
         <HeroSection />
         <HomeDestinations />
         <FeaturedItineraries />
-        <TheTeam />
+        <Welcome />
+        <TheTeam :isHome="true" />
+        <HomeCategories />
+        <HomeReviews />
+        <HomeBlogs />
     </div>
 </template>
 

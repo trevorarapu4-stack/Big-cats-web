@@ -31,7 +31,7 @@
                     she obtained her degree in travel and tourism management.</p>
                 <p>Big Cat Safaris delivers an unforgettable experience in English, French, Chinese, Swahili, and Kinyarwanda.</p>
             </div>
-            <the-team />
+            <the-team :isHome="false" />
             <div class="miss">
                 <h2>Our Goal</h2>
                 <p>Our goal is to provide personalized itineraries for our guests, striving to spot the Big Five,
@@ -56,12 +56,13 @@ const pageData = ref({
 <style lang="scss" scoped>
 .about {
     .inner {
-        max-width: 1000px;
+        max-width: 1100px;
         margin: auto;
         padding: 2rem 1rem;
 
         p {
             line-height: 2.3rem;
+            font-size: 1.1rem;
         }
 
         .top {
@@ -77,7 +78,7 @@ const pageData = ref({
         .story {
             margin-top: 4rem;
             display: grid;
-            gap: 1.5rem;
+            gap: 2rem;
             grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 
             .left {
