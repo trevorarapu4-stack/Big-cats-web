@@ -45,22 +45,20 @@ export default defineNuxtConfig({
     '/about': { prerender: true },
     '/terms': { prerender: true },
     '/contact': { prerender: true },
+
+    // Be more specific with the review routes
+    '/reviews/**': { swr: true },
     '/reviewBigCatSafaris': { prerender: true },
-    
-    '/reviews': { swr: true },
+
     '/categories': { swr: true },
     '/destinations': { swr: true },
     '/gallery': { swr: true },
-    
-    '/blogs': { isr: 3600 },
-    '/blog-[id]': { isr: true },
-    // '/tours': { isr: 3600 },
-    '/tour-[id]': { isr: true },
 
+    '/blogs': { isr: 3600 },
+    '/blog/**': { isr: true }, // Use /** instead of [id]
+    '/tour/**': { isr: true }, // Use /** instead of [id]
     '/admin/**': { ssr: false },
     '/api/**': { cors: true },
-    // Redirects legacy urls
-    // '/old-page': { redirect: '/new-page' }
   },
   app: {
     head: {
