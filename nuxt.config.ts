@@ -45,7 +45,7 @@ export default defineNuxtConfig({
     '/about': { prerender: true },
     '/terms': { prerender: true },
     '/contact': { prerender: true },
-    '/reviewBigCatSarafis': { prerender: true },
+    '/reviewBigCatSafaris': { prerender: true },
     
     '/reviews': { swr: true },
     '/categories': { swr: true },
