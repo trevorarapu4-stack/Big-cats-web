@@ -1,5 +1,9 @@
 <template>
     <div class="texxt">
+        <Head>
+            <Title>Big Cat Safaris Terms And Conditions</Title>
+            <Meta name="description" content="These booking conditions form the basis of your contract with ('we', 'us', and 'our'). Please review them carefully as they outline our respective rights and obligations. By requesting us to confirm your booking, you are deemed to have read and agreed to these conditions." />
+        </Head>
         <h1>Terms and conditions</h1>
         <p>These booking conditions form the basis of your contract with ("we", "us", and "our"). Please review them
             carefully as they outline our respective rights and obligations. By requesting us to confirm your booking,

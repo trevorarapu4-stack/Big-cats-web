@@ -48,22 +48,22 @@
                 <div class="right">
                     <h3>Send us a message</h3>
                     <div class="us">
-                        <UFormField label="Name" name="name">
-                            <UInput v-model="contactData.name" class="w-full" />
+                        <UFormField label="Name" name="name" required >
+                            <UInput v-model="contactData.name" class="w-full" size="xl" />
                         </UFormField>
-                        <UFormField label="Email" name="email">
-                            <UInput v-model="contactData.email" class="w-full" />
+                        <UFormField label="Email" name="email" required >
+                            <UInput v-model="contactData.email" class="w-full" size="xl" />
                         </UFormField>
                     </div>
-                    <UFormField label="Subject" name="subject">
-                        <UInput v-model="contactData.subject" class="w-full" />
+                    <UFormField label="Subject" name="subject" required >
+                        <UInput v-model="contactData.subject" class="w-full" size="xl" />
                     </UFormField>
-                    <UFormField label="Message" name="message">
+                    <UFormField label="Message" name="message" required >
                         <UTextarea v-model="contactData.message" class="w-full"
-                            autoresize />
+                            autoresize size="xl" />
 
                     </UFormField>
-                    <UButton label="Send Message" class="w-fit" />
+                    <UButton label="Send Message" class="w-fit" @click="sendContactMessage" />
                 </div>
 
             </div>
@@ -74,6 +74,8 @@
 <script setup>
 import { UButton } from '#components';
 
+const forLoader = useLoader()
+const forNotifier = useNotifier()
 
 const pageData = ref({
     image: '/images/contact.webp',
@@ -87,6 +89,14 @@ const contactData = ref({
     message: '',
     subject: ''
 })
+
+const sendContactMessage = async () => {
+    if(contactData.value.name && contactData.value.email && contactData.value.subject && contactData.value.subject) {
+        console.log(contactData.value)
+    } else {
+        forNotifier(false, 'Please fill all the available fields')
+    }
+}
 
 </script>
 

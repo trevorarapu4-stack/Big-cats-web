@@ -40,4 +40,37 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
+  routeRules: {
+    '/': { prerender: true },
+    '/about': { prerender: true },
+    '/terms': { prerender: true },
+    '/contact': { prerender: true },
+    '/reviewBigCatSarafis': { prerender: true },
+    
+    '/reviews': { swr: true },
+    '/categories': { swr: true },
+    '/destinations': { swr: true },
+    '/gallery': { swr: true },
+    
+    '/blogs': { isr: 3600 },
+    '/blog-[id]': { isr: true },
+    '/tours': { isr: 3600 },
+    '/tour-[id]': { isr: true },
+
+    '/admin/**': { ssr: false },
+    '/api/**': { cors: true },
+    // Redirects legacy urls
+    // '/old-page': { redirect: '/new-page' }
+  },
+  app: {
+    head: {
+      title: 'Big Cat Safaris', // default fallback title
+      htmlAttrs: {
+        lang: 'en',
+      },
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      ]
+    }
+  }
 })

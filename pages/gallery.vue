@@ -1,5 +1,9 @@
 <template>
     <div class="gallery">
+        <Head>
+            <Title>{{ pageData.heading }}</Title>
+            <Meta name="description" :content="pageData.paragraph" />
+        </Head>
         <div class="inner">
             <top-intro-section :intro-data="pageData" />
             <div class="next">

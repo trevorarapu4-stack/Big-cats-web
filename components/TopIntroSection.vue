@@ -34,10 +34,12 @@ const darknessLevel = 0.3
         height: 100%;
         padding: 5%;
         color: #ffffff;
+        margin: auto;
 
         * {
             max-width: 1200px;
             width: 100%;
+            text-align: center;
         }
 
         h2 {

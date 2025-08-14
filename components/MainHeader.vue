@@ -47,6 +47,7 @@
                     <nuxt-link to="/tours">Tours</nuxt-link>
                     <nuxt-link to="/destinations">Destinations</nuxt-link>
                     <nuxt-link to="/categories">Categories</nuxt-link>
+                    <nuxt-link to="/blogs">Blogs</nuxt-link>
                     <nuxt-link to="/gallery">Gallery</nuxt-link>
                 </div>
                 <UButton to="/contact">Contact us</UButton>

@@ -16,57 +16,62 @@
                                         <UPopover>
                                             <UButton color="neutral" variant="subtle" icon="i-lucide-calendar"
                                                 class="w-full" size="xl">
-                                                {{ modelValue ? df.format(modelValue.toDate(getLocalTimeZone())) :
-                                                    'Select a date' }}
+                                                {{ forNewBooking.startDate ?
+                                                    df.format(forNewBooking.startDate.toDate(getLocalTimeZone())) :
+                                                'Select a date' }}
                                             </UButton>
 
                                             <template #content>
-                                                <UCalendar v-model="modelValue" class="p-2" />
+                                                <UCalendar v-model="forNewBooking.startDate" class="p-2" />
                                             </template>
                                         </UPopover>
                                     </UFormField>
                                     <UFormField label="Accomodation Type" name="Accomodation type">
-                                        <USelectMenu v-model="value" :items="itemss" class="w-full" size="xl" :popper="{ placement: 'bottom-start' }" />
+                                        <USelectMenu v-model="forNewBooking.accomodationType" :items="accoType"
+                                            class="w-full" size="xl" />
                                     </UFormField>
                                 </div>
 
                                 <div class="one" v-if="item.title === 'Personal'">
                                     <UFormField label="Full Name" name="full name">
-                                        <UInput class="w-full" size="xl" />
+                                        <UInput class="w-full" size="xl" v-model="forNewBooking.fullName" />
                                     </UFormField>
                                     <UFormField label="Email" name="email">
-                                        <UInput class="w-full" size="xl" />
+                                        <UInput class="w-full" size="xl" v-model="forNewBooking.email" />
                                     </UFormField>
                                     <UFormField label="Country" name="country">
-                                        <USelectMenu v-model="value" :items="itemss" class="w-full" size="xl" />
+                                        <USelectMenu :items="countries" class="w-full" size="xl"
+                                            v-model="forNewBooking.country" />
                                     </UFormField>
                                 </div>
 
                                 <div class="one" v-if="item.title === 'Occupancy'">
                                     <UFormField label="Number of Adults" name="adults">
-                                        <UInputNumber v-model="valuez" class="w-full" size="xl" :increment="{
-                                            color: 'neutral',
-                                            variant: 'solid',
-                                            size: 'xs'
-                                        }" :decrement="{
-                                            color: 'neutral',
-                                            variant: 'solid',
-                                            size: 'xs'
-                                        }" />
+                                        <UInputNumber v-model="forNewBooking.adults" class="w-full" size="xl"
+                                            :increment="{
+                                                color: 'neutral',
+                                                variant: 'solid',
+                                                size: 'xs'
+                                            }" :decrement="{
+                                                color: 'neutral',
+                                                variant: 'solid',
+                                                size: 'xs'
+                                            }" />
                                     </UFormField>
                                     <UFormField label="Number of children" name="children">
-                                        <UInputNumber v-model="valuez" class="w-full" size="xl" :increment="{
-                                            color: 'neutral',
-                                            variant: 'solid',
-                                            size: 'xs'
-                                        }" :decrement="{
-                                            color: 'neutral',
-                                            variant: 'solid',
-                                            size: 'xs'
-                                        }" />
+                                        <UInputNumber v-model="forNewBooking.children" class="w-full" size="xl"
+                                            :increment="{
+                                                color: 'neutral',
+                                                variant: 'solid',
+                                                size: 'xs'
+                                            }" :decrement="{
+                                                color: 'neutral',
+                                                variant: 'solid',
+                                                size: 'xs'
+                                            }" />
                                     </UFormField>
                                     <UFormField label="Anything else?" name="extra">
-                                        <UTextarea v-model="value" autoresize class="w-full" size="xl" />
+                                        <UTextarea v-model="forNewBooking.extra" autoresize class="w-full" size="xl" />
                                     </UFormField>
                                 </div>
                             </div>
@@ -90,12 +95,7 @@
 <script setup>
 import { useSingleItinerary } from '#imports'
 import { CalendarDate, DateFormatter, getLocalTimeZone } from '@internationalized/date'
-
-const df = new DateFormatter('en-US', {
-    dateStyle: 'medium'
-})
-
-const modelValue = shallowRef(new CalendarDate(2022, 1, 10))
+import { countries, accoType } from '~/assets/js/usables'
 
 const forSingleItinerary = useSingleItinerary()
 const forSingleItineraryData = computed(() => forSingleItinerary.singleItinerary)
@@ -118,18 +118,45 @@ const items = [
     }
 ]
 
+const df = new DateFormatter('en-US', { dateStyle: 'medium' })
 const stepper = useTemplateRef('stepper')
 
-const itemss = ref(['Backlog', 'Todo', 'In Progress', 'Done'])
-const value = ref('Backlog')
-
-const valuez = ref(5)
-
+const nowDate = new Date()
 const forNewBooking = ref({
-    tour: ''
+    tour: '',
+    startDate: new CalendarDate(
+        nowDate.getFullYear(),
+        nowDate.getMonth() + 1, // CalendarDate months are 1-based
+        nowDate.getDate()
+    ),
+    accomodationType: '',
+    fullName: '',
+    email: '',
+    country: '',
+    adults: 1,
+    children: 0,
+    extra: '',
 })
 
+const forLoader = useLoader()
+const forNotofier = useNotifier()
+const capitalizeFirst = (str) => {
+    if (!str) return ''
+    return str.charAt(0).toUpperCase() + str.slice(1)
+}
+
 const submitBooking = () => {
+
+    const list = ['accomodationType', 'fullName', 'email', 'country', 'adults', 'children', 'extra']
+
+    for (const element of list) {
+        if (!forNewBooking.value[element]) {
+            forNotofier(false, `${capitalizeFirst(element)} is Required`)
+            return
+        }
+    }
+
+    forNewBooking.value.startDate = df.format(forNewBooking.value.startDate.toDate(getLocalTimeZone()))
     console.log(forNewBooking.value)
 }
 
@@ -148,10 +175,11 @@ onMounted(() => {
     display: flex;
     // align-items: center;
     justify-content: center;
-    height: 100%;
+    // height: 100%;
 
     .innSte {
         max-width: 700px;
+        padding-bottom: 5rem;
 
         .demoImg {
             height: 150px;

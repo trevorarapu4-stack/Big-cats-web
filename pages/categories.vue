@@ -1,5 +1,10 @@
 <template>
     <div class="allCats">
+        
+        <Head>
+            <Title>{{ pageData.heading }}</Title>
+            <Meta name="description" :content="pageData.paragraph" />
+        </Head>
         <top-intro-section :intro-data="pageData" />
         <div class="inner">
             <UCard variant="subtle" v-for="value in forCategoriesList" :key="value.$id" >

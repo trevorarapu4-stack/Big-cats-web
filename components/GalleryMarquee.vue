@@ -2,7 +2,7 @@
     <NuxtMarquee>
         <img 
         v-for="value in forGalleryList"
-        :src="value.image"
+        :src="`${value.image}?f-webp,q-90`"
         :alt="value.name"
         >
     </NuxtMarquee>

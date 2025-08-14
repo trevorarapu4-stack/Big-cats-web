@@ -1,5 +1,9 @@
 <template>
     <div class="adminInterface">
+        <Head>
+            <Title>Big Cat Safaris Admin</Title>
+            <Meta name="description" content="Welcome to the big cat safaris admin page" />
+        </Head>
         <admin-header />
         <MainInterface />
     </div>

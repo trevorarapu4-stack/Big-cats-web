@@ -1,5 +1,10 @@
 <template>
     <div class="revPage">
+        
+        <Head>
+            <Title>{{ pageData.heading }}</Title>
+            <Meta name="description" :content="pageData.paragraph" />
+        </Head>
         <top-intro-section :intro-data="pageData" />
         <div class="inner">
             <div class="list" v-if="forReviewsList?.length > 0">

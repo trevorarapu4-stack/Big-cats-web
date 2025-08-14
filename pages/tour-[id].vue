@@ -1,7 +1,10 @@
 <template>
     <div class="singleTour">
+        <Head>
+            <Title>{{ forItineraryDoc?.title }} From Big Cat Safaris</Title>
+            <Meta name="description" :content="forItineraryDoc?.summary" />
+        </Head>
         <top-tour-section />
-
         <div class="inner">
             <div class="lft">
                 <UFormField label="Summary">
@@ -68,9 +71,9 @@ const getHtml = (cont) => {
 .singleTour {
     .inner {
         display: grid;
-        grid-template-columns: 1fr 25%;
+        grid-template-columns: 1fr 35%;
         max-width: 1000px;
-        gap: 1.5rem;
+        gap: 1rem;
         margin: 2rem auto;
 
         .lft {
@@ -109,10 +112,17 @@ const getHtml = (cont) => {
                 top: 0;
                 left: 0;
                 right: 0;
+                border-radius: var(--ui-radius);
+                padding: 1rem;
                 padding-top: 4rem;
-                
+
 
                 .subCont {
+                    // background-color: hsl(from #000000 h s l / 0.05);
+                    border-radius: var(--ui-radius);
+                    border: 1px solid var(--color-orange-500);
+                    padding: 1rem;
+
                     :deep(*) {
                         font-size: 1.1rem;
                         line-height: 2rem;

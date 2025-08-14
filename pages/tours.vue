@@ -1,5 +1,9 @@
 <template>
     <div class="tours">
+        <Head>
+            <Title>{{ pageData.heading }}</Title>
+            <Meta name="description" :content="pageData.paragraph" />
+        </Head>
         <top-intro-section :intro-data="pageData" />
 
         <div class="inner">

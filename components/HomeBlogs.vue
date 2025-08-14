@@ -5,11 +5,12 @@
                 <h2>Checkout our latest Blogs</h2>
                 <div class="bott">
                     <p>Grow your knowledge in general wildlife, primates and more</p>
+                    <u-button label="View all blogs" />
                 </div>
             </div>
 
             <div class="list">
-                <UCard v-for="value in forBlogsList.slice(0, 3)" :key="value.$id" @click="goToTour(value.$id)"
+                <UCard v-for="value in forBlogsList.slice(0, 3)" :key="value.$id" @click="goToBlog(value.$id)"
                     style="cursor: pointer;" variant="subtle" >
 
                     <template #default>
@@ -19,8 +20,6 @@
                     </template>
                 </UCard>
             </div>
-            <u-button label="View all blogs" />
-
         </div>
     </div>
 </template>
@@ -33,8 +32,8 @@ const forBlogs = useBlogs()
 const forBlogsList = computed(() => forBlogs.blogs)
 const router = useRouter()
 
-const goToTour = (id) => {
-    router.push(`/tour-${id}`)
+const goToBlog = (id) => {
+    router.push(`/blog-${id}`)
 }
 
 </script>
@@ -61,6 +60,10 @@ const goToTour = (id) => {
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
+
+                p {
+                    font-size: 1.2rem;
+                }
             }
         }
 
@@ -68,7 +71,6 @@ const goToTour = (id) => {
             display: grid;
             gap: 1.5rem;
             grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-            margin-bottom: 3rem;
 
             img {
                 width: 100%;

@@ -48,7 +48,7 @@ const points = ref([
         padding: 1rem;
 
         display: grid;
-        gap: 2rem;
+        gap: 3rem;
         grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 
         .end {
@@ -84,6 +84,7 @@ const points = ref([
                     span {
                         margin-right: 0.5rem;
                         color: var(--color-orange-500);
+                        font-size: 1.5rem;
                     }
                 }
             }

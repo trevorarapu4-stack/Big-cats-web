@@ -1,11 +1,11 @@
 <template>
     <div class="mems">
-        <div class="inner">
+        <div class="inner" :class="props.isHome ? 'atHome' : ''">
             <div class="top">
                 <h2>Meet the team</h2>
                 <p>Get to know the Big Cat Safaris guides</p>
             </div>
-            <div class="list" :class="props.isHome?'atHome':''" >
+            <div class="list">
                 <div class="one" v-for="value in forMembersList" :key="value.$id">
                     <img :src="value.image" :alt="value.name">
                     <div class="info">
@@ -24,7 +24,7 @@ import { useMembers } from '#imports';
 const forMembers = useMembers()
 const forMembersList = computed(() => forMembers.allMembers)
 
-const props = defineProps([ 'isHome' ])
+const props = defineProps(['isHome'])
 
 </script>
 
@@ -77,12 +77,12 @@ const props = defineProps([ 'isHome' ])
                 }
             }
         }
+    }
 
-        .atHome {
-            background-color: hsl(from var(--color-orange-500) h s l / 0.1);
-            padding: 2rem;
-            border-radius: var(--ui-radius);
-        }
+    .atHome {
+        background-color: hsl(from var(--color-orange-500) h s l / 0.1);
+        padding: 2rem;
+        border-radius: var(--ui-radius);
     }
 }
 </style>

@@ -33,12 +33,14 @@ const darknessLevel = 0.7
 
     .cov {
         display: flex;
-        // align-items: center;
+        align-items: center;
         flex-direction: column;
         justify-content: center;
         height: 100%;
         padding: 5%;
         color: #ffffff;
+        margin: auto;
+        text-align: center;
 
         h2,
         p {

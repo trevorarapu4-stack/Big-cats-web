@@ -1,12 +1,14 @@
 <template>
-    <div class="alldests">
+    <div class="allblogs">
+        
         <Head>
             <Title>{{ pageData.heading }}</Title>
             <Meta name="description" :content="pageData.paragraph" />
         </Head>
         <top-intro-section :intro-data="pageData" />
         <div class="inner">
-            <UCard variant="subtle" v-for="value in forDestinationsList" :key="value.$id">
+            <UCard variant="subtle" v-for="value in forBlogsList" :key="value.$id"
+            @click="goToBlog(value.$id)" style="cursor: pointer;" >
                 <template #header>
                     <h2>{{ value.title }}</h2>
                 </template>
@@ -23,21 +25,25 @@
 </template>
 
 <script setup>
-import { useDestinations } from '#imports';
+import { useBlogs } from '#imports';
 
-const forDestinations = useDestinations()
-const forDestinationsList = computed(() => forDestinations.allDestinations)
+const forBlogs = useBlogs()
+const forBlogsList = computed(() => forBlogs.blogs)
 
 const pageData = ref({
-    image: '/images/destinations.webp',
-    heading: 'Big Cats Safaris Destinations',
-    paragraph: 'Discover the incredible destinations we offer for your safari adventure. If you need more information or assistance planning your journey to any of these amazing locations, we’re here to help.'
+    image: '/images/blog.webp',
+    heading: 'Big Cat Safari Blog & Travel Tips',
+    paragraph: 'Dive into stories from the wild, travel advice, and insider tips to make the most of your safari. Our blog brings you closer to nature, culture, and the unforgettable experiences that await.'
 })
 
+const router = useRouter()
+const goToBlog = (id) => {
+    router.push(`/blog-${id}`)
+}
 </script>
 
 <style lang="scss" scoped>
-.alldests {
+.allblogs {
     .inner {
         max-width: 1100px;
 
