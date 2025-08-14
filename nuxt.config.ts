@@ -54,7 +54,7 @@ export default defineNuxtConfig({
     
     '/blogs': { isr: 3600 },
     '/blog-[id]': { isr: true },
-    '/tours': { isr: 3600 },
+    // '/tours': { isr: 3600 },
     '/tour-[id]': { isr: true },
 
     '/admin/**': { ssr: false },
