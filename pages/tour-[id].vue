@@ -128,6 +128,9 @@ const getHtml = (cont) => {
                         line-height: 2rem;
                         margin-bottom: 2rem;
                     }
+                    :deep(strong) {
+                        color: var(--color-orange-500);
+                    }
                 }
             }
         }

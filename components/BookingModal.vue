@@ -18,7 +18,7 @@
                                                 class="w-full" size="xl">
                                                 {{ forNewBooking.startDate ?
                                                     df.format(forNewBooking.startDate.toDate(getLocalTimeZone())) :
-                                                'Select a date' }}
+                                                    'Select a date' }}
                                             </UButton>
 
                                             <template #content>
@@ -96,6 +96,7 @@
 import { useSingleItinerary } from '#imports'
 import { CalendarDate, DateFormatter, getLocalTimeZone } from '@internationalized/date'
 import { countries, accoType } from '~/assets/js/usables'
+import emailjs from '@emailjs/browser'
 
 const forSingleItinerary = useSingleItinerary()
 const forSingleItineraryData = computed(() => forSingleItinerary.singleItinerary)
@@ -139,25 +140,66 @@ const forNewBooking = ref({
 })
 
 const forLoader = useLoader()
-const forNotofier = useNotifier()
-const capitalizeFirst = (str) => {
-    if (!str) return ''
-    return str.charAt(0).toUpperCase() + str.slice(1)
-}
+const forNotifier = useNotifier()
+const router = useRouter()
 
 const submitBooking = () => {
 
-    const list = ['accomodationType', 'fullName', 'email', 'country', 'adults', 'children', 'extra']
-
-    for (const element of list) {
-        if (!forNewBooking.value[element]) {
-            forNotofier(false, `${capitalizeFirst(element)} is Required`)
-            return
-        }
+    if (!forNewBooking.value.accomodationType) {
+        return forNotifier(false, 'Please choose an accomodation type in step 1')
+    }
+    if (!forNewBooking.value.fullName) {
+        return forNotifier(false, 'Please write your full name in step 2')
+    }
+    if (!forNewBooking.value.email) {
+        return forNotifier(false, 'Please enter an email in step 2')
+    }
+    if (!forNewBooking.value.country) {
+        return forNotifier(false, 'You need to select your current country')
+    }
+    if (!forNewBooking.value.adults) {
+        return forNotifier(false, 'The number of adults must be atleast 1')
     }
 
     forNewBooking.value.startDate = df.format(forNewBooking.value.startDate.toDate(getLocalTimeZone()))
     console.log(forNewBooking.value)
+
+    forLoader.showLoader('@sendingBooking', 'Just A Moment', '😍 Hey There! Let send your booking to Big Cat Safaris')
+
+    try {
+        emailjs
+            .send(useRuntimeConfig().public.EMAILJS_SERVICE_ID, useRuntimeConfig().public.EMAILJS_BOOKING_TEMPLATE_ID, {
+                tour: forNewBooking.value.tour,
+                startDate: forNewBooking.value.startDate,
+                accomodationType: forNewBooking.value.accomodationType,
+                fullName: forNewBooking.value.fullName,
+                email: forNewBooking.value.email,
+                country: forNewBooking.value.country,
+                adults: forNewBooking.value.adults,
+                children: forNewBooking.value.children,
+                extra: forNewBooking.value.extra,
+                time: new Date().toLocaleString()
+            }, {
+                publicKey: useRuntimeConfig().public.EMAILJS_YOUR_PUBLIC_KEY,
+            })
+            .then(
+                () => {
+                    forLoader.removeLoader('@sendingBooking')
+                    forNotifier(true, 'Booking Received 😎, Thank you Someone will get back to your soon 🙏')
+                    isBookingProcess.value = false
+                    router.push('/')
+                },
+                (error) => {
+                    console.log('FAILED...', error);
+                    forLoader.removeLoader('@sendingBooking')
+                    forNotifier(false, error.message || 'There was a problem sending your booking')
+                },
+            );
+    } catch (error) {
+        console.log('FAILED LAST...', error);
+        forLoader.removeLoader('@sendingBooking')
+        forNotifier(false, error.message || 'There was a problem sending your booking')
+    }
 }
 
 onMounted(() => {
