@@ -12,7 +12,11 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-swiper',
     'nuxt-marquee',
+    'nuxt-gtag'
   ],
+  gtag: {
+    id: process.env.G_TAG_ID
+  },
   appwrite: {
     endpoint: 'https://fra.cloud.appwrite.io/v1',
     project: '68906804002d6a211f76',
