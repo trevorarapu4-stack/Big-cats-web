@@ -8,14 +8,14 @@
     }">
         <div class="cov">
             <h2>{{ props.introData.heading }}</h2>
-            <p>{{ props.introData.paragraph }}</p>
+            <p v-if="!props.isEntity" >{{ props.introData.paragraph }}</p>
         </div>
     </div>
 </template>
 
 <script setup>
 
-const props = defineProps(['introData'])
+const props = defineProps(['introData', 'isEntity'])
 const darknessLevel = 0.3
 
 </script>

@@ -8,7 +8,7 @@
                 <h4>About us</h4>
                 <h2>Welcome to Big Cat Safaris</h2>
                 <p>At Big Cat Safaris Ltd, we offer unforgettable wildlife experiences, showcasing Rwanda's stunning landscapes and the majestic Big Five animals. Our expert guides and diverse wildlife encounters ensure a unique and immersive safari adventure for our guests</p>
-                <p>We also provide a range of top-notch accommodations tailored to suit various preferences and budgets. Our focus on excellence and responsible tourism practices ensures an unforgettable experience while supporting the conservation of Rwanda's precious ecosystems.</p>
+                <!-- <p>We also provide a range of top-notch accommodations tailored to suit various preferences and budgets. Our focus on excellence and responsible tourism practices ensures an unforgettable experience while supporting the conservation of Rwanda's precious ecosystems.</p> -->
 
                 <div class="points">
                     <div class="each" v-for="(value, idx) in points" :key="idx" >
@@ -68,6 +68,7 @@ const points = ref([
             p {
                 font-size: 1.2rem;
                 margin: 1rem 0;
+                line-height: 2.4rem;
             }
 
             .points {

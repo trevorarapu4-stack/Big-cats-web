@@ -1,25 +1,28 @@
 <template>
     <div class="allCats">
-        
+
         <Head>
             <Title>{{ pageData.heading }}</Title>
             <Meta name="description" :content="pageData.paragraph" />
         </Head>
         <top-intro-section :intro-data="pageData" />
-        <div class="inner">
-            <UCard variant="subtle" v-for="value in forCategoriesList" :key="value.$id" >
-                <template #header>
-                    <h2>{{ value.title }}</h2>
-                </template>
+        <div class="inner" v-if="forCategoriesList.length > 0">
+            <nuxt-link v-for="value in forCategoriesList" :key="value.$id" :to="`/category-${value.$id}`" >
+                <UCard variant="subtle" >
+                    <template #header>
+                        <h2>{{ value.title }}</h2>
+                    </template>
 
-                <template #default>
-                    <div class="stuff">
-                        <img :src="value.image" :alt="value.title">
-                        <p>{{ value.summary }}</p>
-                    </div>
-                </template>
-            </UCard>
+                    <template #default>
+                        <div class="stuff">
+                            <img :src="value.image" :alt="value.title">
+                            <p>{{ value.summary }}</p>
+                        </div>
+                    </template>
+                </UCard>
+            </nuxt-link>
         </div>
+        <loading-content-skeleton v-else :number="5" />
     </div>
 </template>
 
@@ -39,7 +42,6 @@ const pageData = ref({
 </script>
 
 <style lang="scss" scoped>
-
 .allCats {
     .inner {
         max-width: 1100px;
@@ -73,5 +75,4 @@ const pageData = ref({
         }
     }
 }
-
 </style>

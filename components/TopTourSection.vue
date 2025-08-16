@@ -7,9 +7,10 @@
         backgroundPosition: 'center',
     }">
         <div class="cov">
-            <h2>{{ forSingleItineraryData?.title }}</h2>
+            <h2 v-if="forSingleItineraryData?.title" >{{ forSingleItineraryData?.title }}</h2>
+            <USkeleton v-else class="h-8 w-full" />
             <!-- <p>{{ forSingleItineraryData?.summary }}</p> -->
-            <u-button label="Book this tour" size="lg" variant="outline" icon="solar:pen-new-round-bold-duotone" class="mt-5 w-fit" />
+            <u-button @click="isBookingProcess = true" label="Start the booking process" v-if="forSingleItineraryData?.title" size="lg" icon="solar:pen-new-round-bold-duotone" class="mt-5 w-fit" />
         </div>
     </div>
 </template>
@@ -19,8 +20,9 @@ import { useSingleItinerary } from '#imports';
 
 const forSingleItinerary = useSingleItinerary()
 const forSingleItineraryData = computed(() => forSingleItinerary.singleItinerary)
+const isBookingProcess = useCookie('isBookingProcess', { sameSite: 'lax' })
 
-const darknessLevel = 0.3
+const darknessLevel = 0.4
 
 
 </script>
@@ -44,7 +46,7 @@ const darknessLevel = 0.3
 
         h2,
         p {
-            max-width: 1200px;
+            max-width: 1000px;
             width: 100%;
 
             line-clamp: 3;

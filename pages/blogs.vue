@@ -1,26 +1,27 @@
 <template>
     <div class="allblogs">
-        
         <Head>
             <Title>{{ pageData.heading }}</Title>
             <Meta name="description" :content="pageData.paragraph" />
         </Head>
         <top-intro-section :intro-data="pageData" />
-        <div class="inner">
-            <UCard variant="subtle" v-for="value in forBlogsList" :key="value.$id"
-            @click="goToBlog(value.$id)" style="cursor: pointer;" >
-                <template #header>
-                    <h2>{{ value.title }}</h2>
-                </template>
+        <div class="inner" v-if="forBlogsList.length > 0" >
+            <nuxt-link v-for="value in forBlogsList" :key="value.$id" :to="`/blog-${value.$id}`" >
+                <UCard variant="subtle" style="cursor: pointer;">
+                    <template #header>
+                        <h2>{{ value.title }}</h2>
+                    </template>
 
-                <template #default>
-                    <div class="stuff">
-                        <img :src="value.image" :alt="value.title">
-                        <p>{{ value.summary }}</p>
-                    </div>
-                </template>
-            </UCard>
+                    <template #default>
+                        <div class="stuff">
+                            <img :src="value.image" :alt="value.title">
+                            <p>{{ value.summary }}</p>
+                        </div>
+                    </template>
+                </UCard>
+            </nuxt-link>
         </div>
+        <loading-content-skeleton v-else :number="9" />
     </div>
 </template>
 

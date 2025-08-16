@@ -5,30 +5,34 @@
                 <h2>Our Featured Tours</h2>
                 <div class="bott">
                     <p>Many travellers like you love these tours</p>
-                    <u-button label="View all tours" />
+                    <u-button label="View all tours" to="/tours" />
                 </div>
             </div>
 
-            <div class="list">
-                <UCard v-for="value in forItinerariesList.slice(0, 6)" :key="value.$id" @click="goToTour(value.$id)" style="cursor: pointer;" >
-                    <template #header>
-                        <h3>{{ value.title }}</h3>
-                    </template>
+            <div class="list" v-if="forItinerariesList.length > 0" >
+                <nuxt-link v-for="value in forItinerariesList.slice(0, 6)" :key="value.$id"
+                    :to="`/tour-${value.$id}`">
+                    <UCard style="cursor: pointer;">
+                        <template #header>
+                            <h3>{{ value.title }}</h3>
+                        </template>
 
-                    <template #default>
-                        <img :src="value.image" :alt="value.title">
-                        <h4>$ {{ value.cost.toLocaleString() }} Per person</h4>
-                        <p>{{ value.summary }}</p>
-                    </template>
+                        <template #default>
+                            <img :src="value.image" :alt="value.title">
+                            <h4>$ {{ value.cost.toLocaleString() }} Per person</h4>
+                            <p>{{ value.summary }}</p>
+                        </template>
 
-                    <template #footer>
-                        <div class="acts flex gap-4">
-                            <UButton color="neutral">Book Now</UButton>
-                        </div>
-                    </template>
-                </UCard>
-
+                        <template #footer>
+                            <div class="acts flex gap-4">
+                                <UButton color="neutral">Book Now</UButton>
+                            </div>
+                        </template>
+                    </UCard>
+                </nuxt-link>
             </div>
+
+            <loading-content-skeleton v-else :number="6" />
 
         </div>
     </div>
@@ -42,9 +46,9 @@ const forItineraries = useItineraries()
 const forItinerariesList = computed(() => forItineraries.allItineraries)
 const router = useRouter()
 
-const goToTour = (id) => {
-    router.push(`/tour-${id}`)
-}
+// const goToTour = (id) => {
+//     router.push(`/tour-${id}`)
+// }
 
 </script>
 

@@ -3,7 +3,7 @@
         <div class="sliderContainer">
             <swiper-container ref="containerRef" :init="false">
                 <swiper-slide v-for="(slide, idx) in images" :key="idx">
-                    <img :src="slide" alt="Big cat Safaris showcase image">
+                    <img v-if="slide" :src="slide" alt="Big cat Safaris showcase image">
                 </swiper-slide>
             </swiper-container>
         </div>
@@ -63,6 +63,7 @@ onMounted(() => {
 <style lang="scss">
 .sliderContainer {
     position: relative;
+    height: 500px;
 
     swiper-container {
         swiper-slide {

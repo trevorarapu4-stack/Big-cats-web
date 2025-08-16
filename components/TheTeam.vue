@@ -5,12 +5,21 @@
                 <h2>Meet the team</h2>
                 <p>Get to know the Big Cat Safaris guides</p>
             </div>
-            <div class="list">
+            <div class="list" v-if="forMembersList.length > 0" >
                 <div class="one" v-for="value in forMembersList" :key="value.$id">
                     <img :src="value.image" :alt="value.name">
                     <div class="info">
                         <h3>{{ value.name }}</h3>
                         <p>{{ value.position }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="list" v-else >
+                <div class="one" v-for="i in 4" :key="i">
+                    <USkeleton class="h-30 w-30 mb-6 rounded-full" />
+                    <div class="info grid gap-2">
+                        <USkeleton class="h-4 w-[250px]" />
+                        <USkeleton class="h-4 w-[200px]" />
                     </div>
                 </div>
             </div>
@@ -65,6 +74,9 @@ const props = defineProps(['isHome'])
 
                 .info {
                     text-align: center;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
 
                     h3 {
                         font-weight: 600;

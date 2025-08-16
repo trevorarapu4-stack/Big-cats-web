@@ -12,8 +12,11 @@
                     <p>Step into the heart of Africa with Big Cat Safaris. Our gallery captures the thrill of game drives, the majesty of the Big Five, and the raw beauty of untamed wilderness.</p>
                 </div>
 
-                <div class="list">
+                <div class="list" v-if="forGalleryList.length > 0" >
                     <img v-for="value in forGalleryList" :key="value.$id" :src="value.image" :alt="value.name">
+                </div>
+                <div class="list" v-else >
+                    <USkeleton class="h-[250px] w-full" v-for="i in 30" :key="i" />
                 </div>
 
                 <UPagination v-model:page="page" :total="100" />

@@ -6,10 +6,27 @@
                 <p>Check out popular destinations loved by many travelers.</p>
             </div>
             <div class="list">
-                <div class="one" v-for="value in forDestinationsList" :key="value.$id">
-                    <img :src="value.image" :alt="value.title">
+                <nuxt-link v-for="value in forDestinationsList" :key="value.$id" v-if="forDestinationsList.length > 0" :to="`/destination-${value.$id}`" >
+                    <div class="one">
+                        <img v-if="value.image" :src="value.image" :alt="value.title">
+                        <USkeleton v-else class="h-15 w-15 min-w-15 rounded-full" />
+                        <div class="side">
+                            <h3 v-if="value.title">{{ value.title }}</h3>
+                            <div v-else>
+                                <USkeleton class="h-4 w-[100px]" />
+                                <USkeleton class="h-4 mt-4 w-[50px]" />
+                            </div>
+                        </div>
+                        <Icon name="solar:arrow-right-up-line-duotone" />
+                    </div>
+                </nuxt-link>
+                <div class="one" v-for="i in 8" v-else>
+                    <USkeleton class="h-15 w-15 min-w-15 rounded-full" />
                     <div class="side">
-                        <h3>{{ value.title }}</h3>
+                        <div>
+                            <USkeleton class="h-4 w-[100px]" />
+                            <USkeleton class="h-4 mt-4 w-[50px]" />
+                        </div>
                     </div>
                     <Icon name="solar:arrow-right-up-line-duotone" />
                 </div>

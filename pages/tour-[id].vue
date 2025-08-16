@@ -8,11 +8,17 @@
         <div class="inner">
             <div class="lft">
                 <UFormField label="Summary">
-                    <h2>{{ forItineraryDoc?.title }}</h2>
-                    <p>{{ forItineraryDoc?.summary }}</p>
+                    <h2 v-if="forItineraryDoc?.title" >{{ forItineraryDoc?.title }}</h2>
+                    <USkeleton v-else class="h-4 mt-2 w-full" />
+                    <p v-if="forItineraryDoc?.summary" >{{ forItineraryDoc?.summary }}</p>
+                    <USkeleton v-else class="h-30 mt-2 w-full" />
                 </UFormField>
                 <UFormField label="Content">
-                    <div class="itiCont" v-html="getHtml(forItineraryDoc?.content)"></div>
+                    <div class="itiCont" v-if="forItineraryDoc?.content" v-html="getHtml(forItineraryDoc?.content)"></div>
+                    <div v-else >
+                        <USkeleton class="h-10 mt-2 w-full" />
+                        <USkeleton class="h-80 mt-2 w-full" />
+                    </div>
                 </UFormField>
             </div>
             <div class="rght">
@@ -22,7 +28,7 @@
                             <div class="subCont" v-html="getHtml(forItineraryDoc?.[item.id])"></div>
                         </template>
                     </UAccordion>
-                    <u-button label="Book This Tour" @click="isBookingProcess = true" class="mt-4" />
+                    <u-button label="Book This Tour" icon="solar:pen-new-round-bold-duotone" @click="isBookingProcess = true" size="xl" color="neutral" class="mt-4" />
                 </div>
             </div>
         </div>
@@ -118,7 +124,7 @@ const getHtml = (cont) => {
 
 
                 .subCont {
-                    // background-color: hsl(from #000000 h s l / 0.05);
+                    background-color: hsl(from var(--color-orange-500) h s l / 0.05);
                     border-radius: var(--ui-radius);
                     border: 1px solid var(--color-orange-500);
                     padding: 1rem;

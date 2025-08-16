@@ -1,5 +1,6 @@
 <template>
     <div class="tours">
+
         <Head>
             <Title>{{ pageData.heading }}</Title>
             <Meta name="description" :content="pageData.paragraph" />
@@ -7,25 +8,28 @@
         <top-intro-section :intro-data="pageData" />
 
         <div class="inner">
-            <div class="list">
-                <UCard v-for="value in forItinerariesList" :key="value.$id" @click="goToTour(value.$id)" style="cursor: pointer;" >
-                    <template #header>
-                        <h3>{{ value.title }}</h3>
-                    </template>
+            <div class="list" v-if="forItinerariesList.length > 0">
+                <nuxt-link v-for="value in forItinerariesList" :key="value.$id" :to="`/tour-${value.$id}`">
+                    <UCard style="cursor: pointer;">
+                        <template #header>
+                            <h3>{{ value.title }}</h3>
+                        </template>
 
-                    <template #default>
-                        <img :src="value.image" :alt="value.title">
-                        <h4>$ {{ value.cost.toLocaleString() }} Per person</h4>
-                        <p>{{ value.summary }}</p>
-                    </template>
+                        <template #default>
+                            <img :src="value.image" :alt="value.title">
+                            <h4>$ {{ value.cost.toLocaleString() }} Per person</h4>
+                            <p>{{ value.summary }}</p>
+                        </template>
 
-                    <template #footer>
-                        <div class="acts flex gap-4">
-                            <UButton color="neutral">Book Now</UButton>
-                        </div>
-                    </template>
-                </UCard>
+                        <template #footer>
+                            <div class="acts flex gap-4">
+                                <UButton color="neutral">Book Now</UButton>
+                            </div>
+                        </template>
+                    </UCard>
+                </nuxt-link>
             </div>
+            <loading-content-skeleton v-else :number="20" />
         </div>
     </div>
 </template>
@@ -36,10 +40,6 @@ import { useItineraries } from '#imports';
 const forItineraries = useItineraries()
 const forItinerariesList = computed(() => forItineraries.allItineraries)
 const router = useRouter()
-
-const goToTour = (id) => {
-    router.push(`/tour-${id}`)
-}
 
 const pageData = ref({
     image: '/images/tours.webp',

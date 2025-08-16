@@ -8,7 +8,7 @@
                     <u-button label="Read all reaviews" />
                 </div>
             </div>
-            <div class="list">
+            <div class="list" v-if="forReviewsList.length > 0">
                 <nuxt-marquee>
                     <UCard class="mr-7" v-for="value in forReviewsList" :key="value.$id">
                         <template #header>
@@ -19,6 +19,22 @@
                                 <img :src="value.image" :alt="value.title">
                                 <h3>{{ value.title }}</h3>
                                 <p>{{ value.message }}</p>
+                            </div>
+                        </template>
+                    </UCard>
+                </nuxt-marquee>
+            </div>
+            <div class="list" v-else>
+                <nuxt-marquee>
+                    <UCard class="mr-7" v-for="i in 4" :key="i">
+                        <template #header>
+                            <USkeleton class="h-6 w-full" />
+                        </template>
+                        <template #default>
+                            <div class="stuff">
+                                <USkeleton class="h-30 w-30 rounded-full" />
+                                <USkeleton class="h-4 mt-2 w-full" />
+                                <USkeleton class="h-30 mt-2 w-full" />
                             </div>
                         </template>
                     </UCard>
@@ -85,7 +101,8 @@ const forReviewsList = computed(() => forReviews.allReviews)
             }
 
             .stuff {
-                max-width: 400px;
+                width: 400px;
+                // width: 100%;
 
                 img {
                     border-radius: 50%;

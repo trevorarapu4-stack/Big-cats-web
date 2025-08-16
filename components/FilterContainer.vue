@@ -3,13 +3,13 @@
         <div class="inner">
             <h3>Find your ideal tour</h3>
             <div class="selectors">
-                <UFormField label="value">
+                <UFormField label="Destination">
                     <USelectMenu v-model="value" :items="items" class="w-48" />
                 </UFormField>
-                <UFormField label="value2">
+                <UFormField label="Category">
                     <USelectMenu v-model="value2" :items="items" class="w-48" />
                 </UFormField>
-                <UFormField label="value3">
+                <UFormField label="Days">
                     <USelectMenu v-model="value3" :items="items" class="w-48" />
                 </UFormField>
                 <UButton>Find Tours</UButton>

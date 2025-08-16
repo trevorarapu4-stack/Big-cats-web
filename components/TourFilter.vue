@@ -2,46 +2,63 @@
     <div class="itineraries">
         <div class="inner">
             <div class="top">
-                <h2>Checkout our latest Blogs</h2>
+                <h2>{{ props.title }} {{ props.type }} Tours</h2>
                 <div class="bott">
-                    <p>Grow your knowledge in general wildlife, primates and more</p>
-                    <u-button label="View all blogs" to="/blogs" />
+                    <p>A list of tours with the {{ props.title }} {{ props.type }}</p>
+                    <u-button label="View all tours" to="/tours" />
                 </div>
             </div>
 
-            <div class="list" v-if="forBlogsList.length > 0" >
-                <nuxt-link v-for="value in forBlogsList.slice(0, 3)" :key="value.$id" :to="`/blog-${value.$id}`" >
-                    <UCard style="cursor: pointer;" variant="subtle">
+            <div class="list" v-if="props.list.length > 0" >
+                <nuxt-link v-for="value in props.list" :key="value.$id"
+                    :to="`/tour-${value.$id}`">
+                    <UCard style="cursor: pointer;">
+                        <template #header>
+                            <h3>{{ value.title }}</h3>
+                        </template>
+
                         <template #default>
                             <img :src="value.image" :alt="value.title">
-                            <h3>{{ value.title }}</h3>
+                            <h4>$ {{ value.cost.toLocaleString() }} Per person</h4>
                             <p>{{ value.summary }}</p>
+                        </template>
+
+                        <template #footer>
+                            <div class="acts flex gap-4">
+                                <UButton color="neutral">Book Now</UButton>
+                            </div>
                         </template>
                     </UCard>
                 </nuxt-link>
             </div>
-            <loading-content-skeleton v-else :number="3" />
+            <loading-content-skeleton v-else :number="6" />
+
         </div>
     </div>
 </template>
 
 <script setup>
 
-import { useBlogs } from '#imports';
+import { useItineraries } from '#imports';
 
-const forBlogs = useBlogs()
-const forBlogsList = computed(() => forBlogs.blogs)
+const forItineraries = useItineraries()
+const forItinerariesList = computed(() => forItineraries.allItineraries)
 const router = useRouter()
+
+const props = defineProps(['type', 'title', 'list'])
 
 </script>
 
 <style lang="scss" scoped>
 .itineraries {
-    margin: 5rem 0;
+
+    // background-color: hsl(from var(--color-orange-500) h s l / 0.1);
+    // background-color: rgba(0, 0, 0, 0.1);
+    margin-bottom: 5rem;
 
     .inner {
-        padding: 5rem 1rem;
-        max-width: 1000px;
+        padding: 1rem;
+        max-width: 1100px;
         margin: auto;
 
         .top {
@@ -57,17 +74,13 @@ const router = useRouter()
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
-
-                p {
-                    font-size: 1.2rem;
-                }
             }
         }
 
         .list {
             display: grid;
             gap: 1.5rem;
-            grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
 
             img {
                 width: 100%;
@@ -78,16 +91,10 @@ const router = useRouter()
                 margin-bottom: 0.5rem;
             }
 
-            h3 {
+            h4 {
                 font-weight: 700;
                 color: var(--color-orange-500);
                 margin-bottom: 0.5rem;
-
-                line-clamp: 1;
-                -webkit-line-clamp: 1;
-                display: -webkit-box;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
             }
 
             p {
@@ -98,6 +105,8 @@ const router = useRouter()
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
+
+                margin-bottom: 1rem;
             }
         }
     }

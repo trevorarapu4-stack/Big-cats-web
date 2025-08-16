@@ -1,6 +1,12 @@
 <template>
     <div class="hero">
-        <div class="inner">
+        <div class="inner" :style="{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, ${darknessLevel}), rgba(0, 0, 0, ${darknessLevel})), url('/slider/one.webp')`,
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'scroll',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+        }">
             <HeroSlider />
             <div class="cover">
                 <h1>Enjoy Your Vacation With Us</h1>
@@ -38,6 +44,8 @@
         color: #ffffff;
         padding: 1rem;
         padding-bottom: 5rem;
+
+        height: 500px;
 
         h1 {
             font-size: 4rem;
